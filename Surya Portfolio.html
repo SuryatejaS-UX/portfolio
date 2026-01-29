@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Surya Teja | UX Designer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* --- Theme Variables --- */
+        :root {
+            --bg-main: #0f0f11;
+            --bg-card: #1c1c1e;
+            --border-card: #2e2e30;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af; /* gray-400 */
+            --text-tertiary: #6b7280; /* gray-500 */
+            --bg-tag: rgba(255, 255, 255, 0.03);
+            --border-tag: rgba(255, 255, 255, 0.1);
+            --timeline-line: #374151; /* gray-700 */
+            --icon-bg: rgba(55, 65, 81, 0.5); /* gray-700/50 */
+            --shadow-card: rgba(0, 0, 0, 0.5);
+            
+            /* Carousel Dots */
+            --dot-active: #ffffff;
+            --dot-inactive: #4b5563; /* gray-600 */
+            
+            /* Modal */
+            --modal-bg: #1c1c1e;
+            --modal-close-bg: #1f2937; /* gray-800 */
+            --modal-close-icon: #9ca3af; /* gray-400 */
+            --modal-nav-icon: rgba(255, 255, 255, 0.5);
+            --modal-nav-icon-hover: #ffffff;
+            --modal-divider: #374151;
+        }
+
+        [data-theme="light"] {
+            --bg-main: #f3f4f6; /* zinc-100 */
+            --bg-card: #ffffff;
+            --border-card: #d1d5db; /* gray-300 - Darker for better contrast */
+            --text-primary: #111827; /* gray-900 */
+            --text-secondary: #4b5563; /* gray-600 */
+            --text-tertiary: #6b7280; /* gray-500 */
+            --bg-tag: #f9fafb; /* gray-50 */
+            --border-tag: #d1d5db; /* gray-300 */
+            --timeline-line: #d1d5db; /* gray-300 */
+            --icon-bg: #ffffff; /* White buttons instead of gray-100 to stand out */
+            --shadow-card: rgba(0, 0, 0, 0.08); /* Slightly stronger shadow */
+
+            /* Carousel Dots */
+            --dot-active: #111827; /* gray-900 */
+            --dot-inactive: #d1d5db; /* gray-300 */
+
+            /* Modal */
+            --modal-bg: #ffffff;
+            --modal-close-bg: #f3f4f6;
+            --modal-close-icon: #4b5563;
+            --modal-nav-icon: rgba(0, 0, 0, 0.3);
+            --modal-nav-icon-hover: #000000;
+            --modal-divider: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* --- GLOBAL OVERRIDES --- */
+        .text-white { color: var(--text-primary) !important; }
+        .text-gray-200 { color: var(--text-primary) !important; }
+        .text-gray-300 { color: var(--text-secondary) !important; }
+        .text-gray-400 { color: var(--text-secondary) !important; }
+        .text-gray-500 { color: var(--text-tertiary) !important; }
+
+        /* Icon Colors (High Contrast in Light Mode) */
+        [data-theme="light"] .text-blue-400 { color: #2563eb !important; }
+        [data-theme="light"] .text-blue-300 { color: #1d4ed8 !important; }
+        [data-theme="light"] .text-green-400 { color: #15803d !important; } /* Darker green */
+        [data-theme="light"] .text-purple-400 { color: #7e22ce !important; } /* Darker purple */
+        [data-theme="light"] .text-yellow-400 { color: #F59320 !important; } /* Tree Poppy */
+        [data-theme="light"] .text-yellow-500 { color: #F59320 !important; }
+        [data-theme="light"] .text-pink-400 { color: #be185d !important; } /* Darker pink */
+        [data-theme="light"] .text-teal-400 { color: #0f766e !important; } /* Darker teal */
+        [data-theme="light"] .text-orange-400 { color: #c2410c !important; } /* Darker orange */
+        [data-theme="light"] .text-indigo-400 { color: #4338ca !important; } /* Darker indigo */
+
+        /* Backgrounds & Buttons */
+        /* .bg-gray-800 is used for buttons and card icons */
+        .bg-gray-800 { background-color: var(--icon-bg) !important; border: 1px solid var(--border-card); }
+        .bg-gray-800\/50 { background-color: var(--icon-bg) !important; }
+        .bg-gray-800\/30 { background-color: var(--icon-bg) !important; }
+        
+        /* CLEAN PASTEL BACKGROUNDS FOR ICONS IN LIGHT MODE */
+        /* Replaces the muddy transparency with clean colors */
+        [data-theme="light"] .bg-green-900\/50 { background-color: #dcfce7 !important; border: none !important; }
+        [data-theme="light"] .bg-purple-900\/50 { background-color: #f3e8ff !important; border: none !important; }
+        [data-theme="light"] .bg-pink-900\/50 { background-color: #fce7f3 !important; border: none !important; }
+        [data-theme="light"] .bg-teal-900\/50 { background-color: #ccfbf1 !important; border: none !important; }
+        [data-theme="light"] .bg-indigo-900\/50 { background-color: #e0e7ff !important; border: none !important; }
+        [data-theme="light"] .bg-blue-900\/30 { background-color: #dbeafe !important; border: none !important; }
+        
+        /* Fix the Featured Project Gradient in Light Mode */
+        /* Changes black fade to white fade so text stays readable */
+        [data-theme="light"] .absolute.inset-0.bg-gradient-to-t {
+            background: linear-gradient(to top, #ffffff 10%, rgba(255,255,255,0.9) 60%, transparent 100%) !important;
+        }
+
+        /* Borders */
+        .border-gray-700 { border-color: var(--timeline-line) !important; }
+        .border-gray-800 { border-color: var(--border-card) !important; }
+        /* Fix button borders in light mode */
+        [data-theme="light"] .border-gray-700 { border-color: #d1d5db !important; } 
+        
+        /* Gradients Overrides */
+        [data-theme="light"] .bg-gradient-to-br { background-image: linear-gradient(to bottom right, #ffffff, #f9fafb) !important; }
+        [data-theme="light"] .bg-gradient-to-r { background-image: linear-gradient(to right, #f3f4f6, #e5e7eb) !important; }
+
+        /* Component Styles */
+        .bento-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+        .bento-card:hover {
+            transform: translateY(-4px) scale-[1.01];
+            border-color: #9ca3af;
+            box-shadow: 0 20px 40px -10px var(--shadow-card);
+            z-index: 10;
+        }
+
+        .skill-tag {
+            background: var(--bg-tag);
+            border: 1px solid var(--border-tag);
+            color: var(--text-secondary);
+        }
+        .skill-tag:hover {
+            border-color: var(--text-tertiary);
+        }
+
+        .timeline-line { border-left-color: var(--timeline-line) !important; }
+        .dot-active { background-color: var(--dot-active) !important; }
+        .dot-inactive { background-color: var(--dot-inactive) !important; }
+
+        /* Modal */
+        #project-modal .bg-\[\#1c1c1e\] { background-color: var(--modal-bg) !important; }
+        .modal-close-btn { 
+            background-color: var(--modal-close-bg) !important;
+            color: var(--modal-close-icon) !important;
+        }
+        .modal-close-btn:hover { color: var(--text-primary) !important; }
+        .modal-nav-arrow { color: var(--modal-nav-icon) !important; }
+        .modal-nav-arrow:hover { color: var(--modal-nav-icon-hover) !important; }
+        
+        /* --- RICH CASE STUDY TYPOGRAPHY --- */
+        .case-study-content {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--text-secondary);
+        }
+        
+        .case-study-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .case-study-content h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .case-study-content p {
+            margin-bottom: 1.25rem;
+        }
+        
+        .case-study-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .case-study-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .case-study-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .case-study-content blockquote {
+            border-left: 4px solid var(--border-card);
+            padding-left: 1rem;
+            font-style: italic;
+            color: var(--text-tertiary);
+            margin: 1.5rem 0;
+        }
+        
+        .case-study-content hr {
+            border-color: var(--modal-divider);
+            margin: 2rem 0;
+        }
+
+        /* Meta Data Grid in Modal */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--modal-divider);
+        }
+        @media (min-width: 640px) {
+            .meta-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        .meta-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); display: block; margin-bottom: 0.25rem; }
+        .meta-value { font-size: 0.875rem; font-weight: 500; color: var(--text-primary); }
+
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 100;
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            color: var(--text-primary);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+        .theme-toggle:hover { transform: scale(1.1); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-main); }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+        [data-theme="light"] ::-webkit-scrollbar-thumb { background: #d1d5db; }
+        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+
+        /* Animations */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-enter { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+        .delay-600 { animation-delay: 600ms; }
+
+        /* Testimonial Slide - Using CSS Grid Stack for better auto-height handling */
+        .testimonial-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+        }
+        .testimonial-slide {
+            grid-column: 1 / -1;
+            grid-row: 1 / -1;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            pointer-events: none;
+            width: 100%;
+        }
+        .testimonial-slide.active { 
+            opacity: 1; 
+            transform: translateX(0); 
+            pointer-events: auto; 
+            position: relative; /* Keeps it in flow */
+        }
+        
+        /* Modal States */
+        .modal-open { opacity: 1 !important; pointer-events: auto !important; }
+        .modal-content-container {
+            transform: translateY(100%); opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+        }
+        @media (min-width: 768px) {
+            .modal-content-container {
+                transform: scale(0.95);
+                opacity: 0;
+                transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+            }
+        }
+        .modal-open .modal-content-container { transform: translateY(0) scale(1); opacity: 1; }
+    </style>
+</head>
+<body class="antialiased min-h-screen p-4 md:p-8 flex justify-center">
+
+    <!-- Theme Toggle Button (Bottom Right) -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+    </button>
+
+    <!-- Main Grid Container -->
+    <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-4 auto-rows-min gap-4 md:gap-6">
+
+        <!-- 1. Top Section (Hero) -->
+        <div class="animate-enter bento-card rounded-3xl p-6 md:p-8 col-span-1 md:col-span-2 row-span-2 flex flex-col justify-between relative overflow-hidden group">
+            <div class="absolute inset-0 bg-pattern z-0"></div>
+            
+            <div class="z-10">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-gray-700 shadow-lg shrink-0">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Christopher&backgroundColor=b6e3f4" alt="Surya Teja" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Surya Teja</h1>
+                        <p class="text-blue-400 font-medium text-lg">UX Designer</p>
+                    </div>
+                </div>
+
+                <p class="text-gray-300 text-lg md:text-xl leading-relaxed mb-8">
+                    Designing thoughtful user experiences across <span class="text-white font-semibold">Generative AI</span>, <span class="text-white font-semibold">Banking</span>, <span class="text-white font-semibold">Sustainability</span>, and <span class="text-white font-semibold">Insurance</span>.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-3 z-10">
+                <a href="javascript:void(0)" onclick="copyEmail()" class="px-6 py-2.5 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors flex items-center gap-2 border border-gray-700">
+                    <i class="fa-solid fa-envelope"></i> Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/suryatejashankapally/" target="_blank" class="px-6 py-2.5 bg-gray-800 text-white border border-gray-700 font-semibold rounded-full hover:bg-gray-700 transition-colors flex items-center gap-2">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="#" class="px-4 py-2.5 bg-gray-800 text-white border border-gray-700 font-semibold rounded-full hover:bg-gray-700 transition-colors" title="Download Resume">
+                    <i class="fa-solid fa-file-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- 2. About Me -->
+        <div class="animate-enter delay-100 bento-card rounded-3xl p-6 md:p-8 col-span-1 md:col-span-2 flex flex-col justify-center bg-gradient-to-br from-[#1c1c1e] to-[#252528]">
+            <h2 class="text-xl font-bold mb-3 text-gray-200 flex items-center gap-2">
+                <i class="fa-solid fa-user-astronaut text-purple-400"></i> Philosophy
+            </h2>
+            <p class="text-gray-400 leading-relaxed">
+                I believe in simplifying complex workflows into intuitive experiences. At <span class="text-white">TCS</span>, I’ve worked on scalable design systems, generative AI applications, and productivity tools for enterprise users, proving that B2B software doesn't have to be boring.
+            </p>
+        </div>
+
+        <!-- 3. Skills Snapshot -->
+        <div class="animate-enter delay-200 bento-card rounded-3xl p-6 col-span-1 md:col-span-2 row-span-1">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-gray-200">Skills & Tools</h2>
+                <i class="fa-solid fa-layer-group text-blue-400"></i>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Design</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 rounded-md text-sm text-gray-300">User Research</span>
+                        <span class="skill-tag px-3 py-1 rounded-md text-sm text-gray-300">Wireframing</span>
+                        <span class="skill-tag px-3 py-1 rounded-md text-sm text-gray-300">Prototyping</span>
+                        <span class="skill-tag px-3 py-1 rounded-md text-sm text-gray-300">Visual Design</span>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Tech & Domain</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-tag px-3 py-1 rounded-md text-sm text-gray-300">Figma</span>
+                        <span class="skill-tag px-3 py-1 rounded-md text-sm text-gray-300">Adobe XD</span>
+                        <span class="skill-tag px-3 py-1 rounded-md text-sm text-gray-300">Generative AI</span>
+                        <span class="skill-tag px-3 py-1 rounded-md text-sm text-gray-300">FinTech</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECT GRID SECTION -->
+        
+        <!-- 4. Case Study: Gen AI -->
+        <div onclick="openProject('genai')" class="animate-enter delay-300 cursor-pointer bento-card rounded-3xl p-0 col-span-1 md:col-span-2 row-span-2 group block relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-10"></div>
+            <div class="absolute inset-0 bg-gray-800 z-0">
+                 <svg class="w-full h-full opacity-20 group-hover:opacity-30 transition-opacity duration-500" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path d="M0 100 C 20 0 50 0 100 100 Z" fill="#60a5fa" />
+                    <path d="M0 100 C 30 20 70 20 100 100 Z" fill="#a78bfa" style="mix-blend-mode: overlay;" />
+                 </svg>
+            </div>
+            
+            <div class="relative z-20 p-6 md:p-8 h-full flex flex-col justify-end">
+                <div class="mb-4">
+                    <span class="bg-blue-500/20 text-blue-300 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Featured Project</span>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">Generative AI Design Tool</h3>
+                <p class="text-gray-300 mb-4 line-clamp-2">Streamlining the artifact editing & sharing flow for enterprise users. A deep dive into prompt refinement UI.</p>
+                
+                <div class="grid grid-cols-2 gap-4 mt-2 border-t border-gray-700 pt-4">
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase">Impact</p>
+                        <p class="text-white font-semibold">Reduced clicks by 40%</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 uppercase">Role</p>
+                        <p class="text-white font-semibold">Lead Designer</p>
+                    </div>
+                </div>
+                
+                <div class="mt-4 flex items-center text-blue-400 font-medium text-sm group-hover:translate-x-2 transition-transform">
+                    View Case Study <i class="fa-solid fa-arrow-right ml-2"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4b. Case Study: Field Officer App POC -->
+        <div onclick="openProject('fieldofficer')" class="animate-enter delay-400 cursor-pointer bento-card rounded-3xl p-6 col-span-1 md:col-span-1 group block flex flex-col justify-between">
+            <div>
+                <div class="w-10 h-10 rounded-full bg-green-900/50 flex items-center justify-center mb-4 text-green-400 font-bold">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Field Officer App</h3>
+                <p class="text-sm text-gray-400">Offline-first mobile tool for on-ground data collection.</p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-800">
+                <p class="text-green-400 font-bold text-sm">Sync Efficiency</p>
+            </div>
+        </div>
+
+        <!-- 4c. Case Study: API Registration -->
+        <div onclick="openProject('apiregistration')" class="animate-enter delay-400 cursor-pointer bento-card rounded-3xl p-6 col-span-1 md:col-span-1 group block flex flex-col justify-between">
+            <div>
+                <div class="w-10 h-10 rounded-full bg-pink-900/50 flex items-center justify-center mb-4 text-pink-400 font-bold">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">API Platform</h3>
+                <p class="text-sm text-gray-400">Register, configure, and consume APIs within decision strategies.</p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-800">
+                <p class="text-pink-400 font-bold text-sm">Low-Code Integration</p>
+            </div>
+        </div>
+
+        <!-- 4d. Case Study: Micro Usability -->
+        <div onclick="openProject('microusability')" class="animate-enter delay-500 cursor-pointer bento-card rounded-3xl p-6 col-span-1 md:col-span-1 group block flex flex-col justify-between relative overflow-hidden">
+            <i class="fa-brands fa-medium absolute -right-4 -top-4 text-8xl text-white opacity-5 pointer-events-none"></i>
+            <div>
+                <div class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center mb-4 border border-gray-200">
+                    <i class="fa-brands fa-medium-m"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Micro Usability</h3>
+                <p class="text-sm text-gray-400">Why small usability problems deserve macro attention.</p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-800 flex justify-between items-center">
+                <p class="text-white font-bold text-sm">Article</p>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gray-500"></i>
+            </div>
+        </div>
+
+        <!-- 4e. Case Study: Custom Action Creator -->
+        <div onclick="openProject('customaction')" class="animate-enter delay-500 cursor-pointer bento-card rounded-3xl p-6 col-span-1 md:col-span-1 group block flex flex-col justify-between">
+            <div>
+                <div class="w-10 h-10 rounded-full bg-indigo-900/50 flex items-center justify-center mb-4 text-indigo-400 font-bold">
+                    <i class="fa-solid fa-gears"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Custom Action Creator</h3>
+                <p class="text-sm text-gray-400">Safe JSON configuration for non-devs.</p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-800">
+                <p class="text-indigo-400 font-bold text-sm">Zero Runtime Errors</p>
+            </div>
+        </div>
+
+        <!-- 5. Experience -->
+        <div class="animate-enter delay-600 bento-card rounded-3xl p-6 md:p-8 col-span-1 md:col-span-2">
+            <h2 class="text-xl font-bold text-gray-200 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-briefcase text-yellow-500"></i> Experience
+            </h2>
+            
+            <div class="relative pl-6 border-l border-gray-700 timeline-line space-y-8">
+                <!-- Role 1 -->
+                <div class="relative">
+                    <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-blue-500 border-4 border-gray-800"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1">
+                        <h3 class="text-white font-bold text-lg">UX Designer</h3>
+                        <span class="text-sm text-gray-500 font-mono">2022 – Present</span>
+                    </div>
+                    <p class="text-blue-400 text-sm font-medium mb-2">Tata Consultancy Services (TCS)</p>
+                    <p class="text-gray-400 text-sm">Leading design for GenAI initiatives. Improved output refinement workflows and established core design patterns for banking clients.</p>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-gray-600 border-4 border-gray-800"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1">
+                        <h3 class="text-gray-200 font-bold text-lg">Storyboard Artist Intern</h3>
+                        <span class="text-sm text-gray-500 font-mono">2021</span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-medium mb-2">Greeniiac</p>
+                    <p class="text-gray-400 text-sm">Visualized concepts and created illustrations for digital campaigns.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Social Proof / Testimonials Carousel -->
+        <div class="animate-enter delay-600 bento-card rounded-3xl p-6 md:p-8 col-span-1 md:col-span-2 flex flex-col justify-center relative overflow-hidden">
+            <div class="flex items-center gap-2 mb-6 z-10 relative">
+                <i class="fa-solid fa-quote-left text-blue-500 text-xl"></i>
+                <h2 class="text-xl font-bold text-gray-200">What People Say</h2>
+            </div>
+            
+            <div class="relative min-h-[350px] md:min-h-[260px] testimonial-wrapper">
+                <!-- Testimonial 1 -->
+                <div id="t-1" class="testimonial-slide active flex flex-col justify-center h-full">
+                    <blockquote class="text-gray-300 italic text-base md:text-lg leading-relaxed mb-6">
+                        "I've worked with Surya and found him to be a reliable and thoughtful designer. He approaches design with curiosity, takes feedback positively, and consistently delivers well-considered solutions. Surya collaborates well with teams and shows strong ownership in his work. I'm confident he'll continue to grow and add value wherever he works."
+                    </blockquote>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-white shrink-0">AB</div>
+                        <div>
+                            <div class="text-white font-semibold text-sm">Ankit Biswal</div>
+                            <div class="text-blue-400 text-xs">Senior UX Designer, TCS</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div id="t-2" class="testimonial-slide flex flex-col justify-center h-full">
+                    <blockquote class="text-gray-300 italic text-base md:text-lg leading-relaxed mb-6">
+                        "The design system Surya built unified our fragmented products. He thinks in systems, not just screens."
+                    </blockquote>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-white shrink-0">DC</div>
+                        <div>
+                            <div class="text-white font-semibold text-sm">David Chen</div>
+                            <div class="text-blue-400 text-xs">Engineering Lead</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div id="t-3" class="testimonial-slide flex flex-col justify-center h-full">
+                    <blockquote class="text-gray-300 italic text-base md:text-lg leading-relaxed mb-6">
+                        "Incredibly detail-oriented. He spotted usability issues in our claims portal that our entire team had missed."
+                    </blockquote>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-white shrink-0">SJ</div>
+                        <div>
+                            <div class="text-white font-semibold text-sm">Sarah Jenkins</div>
+                            <div class="text-blue-400 text-xs">Client, Banking</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dots -->
+            <div class="flex gap-2 mt-4 z-10 relative">
+                <button onclick="showTestimonial(1)" class="w-2 h-2 rounded-full dot-active transition-opacity" id="dot-1"></button>
+                <button onclick="showTestimonial(2)" class="w-2 h-2 rounded-full dot-inactive hover:opacity-75 transition-opacity" id="dot-2"></button>
+                <button onclick="showTestimonial(3)" class="w-2 h-2 rounded-full dot-inactive hover:opacity-75 transition-opacity" id="dot-3"></button>
+            </div>
+        </div>
+
+        <!-- 7a. Certifications -->
+        <div class="animate-enter delay-600 bento-card rounded-3xl p-6 md:p-8 col-span-1 md:col-span-2">
+            <h2 class="text-xl font-bold text-gray-200 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-certificate text-yellow-400"></i> Certifications
+            </h2>
+            <div class="space-y-4">
+                <div class="bg-gray-800/50 p-4 rounded-xl border border-gray-700 font-semibold flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-900/30 flex items-center justify-center text-blue-400 shrink-0">
+                        <i class="fa-brands fa-google"></i>
+                    </div>
+                    <div>
+                        <div class="text-white font-semibold">Google UX Design</div>
+                        <div class="text-xs text-gray-400">Professional Certificate</div>
+                    </div>
+                </div>
+                <div class="bg-gray-800/50 p-4 rounded-xl border border-gray-700 font-semibold flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-blue-900/30 flex items-center justify-center text-blue-400 shrink-0">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+                    <div>
+                        <div class="text-white font-semibold">TCS Certified UX</div>
+                        <div class="text-xs text-gray-400">Internal Certification</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7b. Education -->
+        <div class="animate-enter delay-600 bento-card rounded-3xl p-6 md:p-8 col-span-1 md:col-span-2">
+            <h2 class="text-xl font-bold text-gray-200 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-graduation-cap text-pink-400"></i> Education
+            </h2>
+            
+            <div class="relative pl-6 border-l border-gray-700 timeline-line space-y-8">
+                <!-- Education 1: B.Tech -->
+                <div class="relative">
+                    <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-pink-500 border-4 border-gray-800"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1">
+                        <h3 class="text-white font-bold text-lg">B.Tech in Mechanical Engineering</h3>
+                        <span class="text-sm text-gray-500 font-mono">2018 – 2021</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-2">JNTU Hyderabad</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        Foundation in systems thinking and structural design principles.
+                    </p>
+                </div>
+
+                <!-- Education 2: Diploma -->
+                <div class="relative">
+                    <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-gray-600 border-4 border-gray-800"></div>
+                    <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1">
+                        <h3 class="text-gray-200 font-bold text-lg">Diploma in Mechanical Engineering</h3>
+                        <span class="text-sm text-gray-500 font-mono">2015 – 2018</span>
+                    </div>
+                    <p class="text-gray-500 text-sm mb-2">SBTET</p>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        Technical education focused on engineering fundamentals and drafting.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Footer -->
+        <div class="animate-enter delay-600 bento-card rounded-3xl p-8 col-span-1 md:col-span-4 bg-gradient-to-r from-gray-900 to-gray-800 border-t border-gray-700 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Ready to build something amazing?</h2>
+            <p class="text-gray-400 mb-8 max-w-xl mx-auto">I'm currently open to UX Designer opportunities where I can apply my skills in Gen AI and enterprise systems.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="javascript:void(0)" onclick="copyEmail()" class="w-full sm:w-auto px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 border border-gray-700">
+                    <i class="fa-solid fa-envelope"></i> Connect via Email
+                </a>
+                <div class="flex gap-4">
+                    <a href="https://www.linkedin.com/in/suryatejashankapally/" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 border border-gray-700 text-white hover:bg-gray-700 hover:scale-110 transition-all">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.behance.net/SuryaTejaShankapally" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 border border-gray-700 text-white hover:bg-gray-700 hover:scale-110 transition-all">
+                        <i class="fa-brands fa-behance"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-xs text-gray-600">
+                © <span id="year">2024</span> Surya Teja. Designed in the Browser.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white text-black px-6 py-3 rounded-full shadow-2xl opacity-0 pointer-events-none transition-opacity duration-300 z-50 font-medium text-sm flex items-center gap-2">
+        <i class="fa-solid fa-check-circle text-green-600"></i>
+        <span>Email address copied to clipboard!</span>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        <!-- Content Container -->
+        <div class="relative modal-content-container bg-[#1c1c1e] w-full h-full md:h-auto md:max-h-[90vh] md:max-w-4xl md:rounded-3xl border-0 md:border border-gray-700 shadow-2xl flex flex-col group/modal rounded-none">
+            
+            <!-- Modal Header -->
+            <div class="flex justify-between items-start p-6 md:p-8 border-b border-gray-800 bg-[#1c1c1e] rounded-none md:rounded-t-3xl z-20 pt-12 md:pt-8 safe-area-inset-top">
+                <div>
+                     <div class="flex items-center gap-3 mb-3">
+                        <span id="modal-tag" class="bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Featured Project</span>
+                        <span id="modal-counter" class="text-gray-500 text-sm font-mono tracking-wider"></span>
+                     </div>
+                     <h3 id="modal-title" class="text-2xl md:text-3xl font-bold text-white">Project Title</h3>
+                </div>
+                <button onclick="closeModal()" class="modal-close-btn w-10 h-10 rounded-full flex items-center justify-center transition-colors z-50">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- In-Modal Navigation Arrows -->
+            <button onclick="navigateProject(-1)" class="absolute left-2 md:-left-16 top-1/2 transform -translate-y-1/2 modal-nav-arrow p-4 transition-colors z-50 hidden md:block">
+                <i class="fa-solid fa-chevron-left text-3xl"></i>
+            </button>
+            <button onclick="navigateProject(1)" class="absolute right-2 md:-right-16 top-1/2 transform -translate-y-1/2 modal-nav-arrow p-4 transition-colors z-50 hidden md:block">
+                <i class="fa-solid fa-chevron-right text-3xl"></i>
+            </button>
+
+            <!-- Modal Body -->
+            <div id="modal-body" class="overflow-y-auto p-6 md:p-8 space-y-8 flex-1 prose-content">
+                <div id="modal-content-area" class="case-study-content">
+                    <!-- Dynamic Content Injected Here -->
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="p-6 md:p-8 border-t border-gray-800 bg-[#1c1c1e] rounded-none md:rounded-b-3xl flex justify-between items-center pb-8 safe-area-inset-bottom">
+                 <span id="modal-confidential-text" class="text-xs text-gray-600">Confidential Project • TCS</span>
+                 <a id="modal-action-btn" href="#" class="ml-auto px-6 py-2.5 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors inline-block text-sm">Close View</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Theme Logic ---
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.getElementById('theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                body.removeAttribute('data-theme');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+            const icon = document.getElementById('theme-icon');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- FULLY RICH CONTENT PROJECT DATA ---
+        const projects = {
+            'genai': {
+                title: "Generative AI Design Tool",
+                tag: "Generative AI",
+                fullContent: `
+                    <div class="meta-grid">
+                        <div><span class="meta-label">Role</span><div class="meta-value">Lead Designer</div></div>
+                        <div><span class="meta-label">Context</span><div class="meta-value">Internal Tool</div></div>
+                        <div><span class="meta-label">Duration</span><div class="meta-value">4 Months</div></div>
+                        <div><span class="meta-label">Impact</span><div class="meta-value">-40% Clicks</div></div>
+                    </div>
+                    <h2>The Problem</h2>
+                    <p>Enterprise users were abandoning the GenAI tool (60% drop-off) because they found raw AI outputs difficult to refine. They suffered from 'Blank Page Syndrome'—lacking the specific prompt engineering skills needed to get quality results, leading to frustration.</p>
+                    
+                    <h2>Our Approach</h2>
+                    <p>We pivoted from a text-heavy command line interface to a <strong>'Visual Tuner' GUI</strong>. The goal was to democratize prompt engineering by mapping complex parameters to simple UI controls.</p>
+                    
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>Prompt Recipes:</strong> A side-panel library of pre-built, verified prompt structures for common use cases (e.g., "Summarize Meeting", "Generate SQL").</li>
+                        <li><strong>Visual Sliders:</strong> Mapped complex parameters (Temperature, Token Limit) to user-friendly sliders like 'Creativity' and 'Length'.</li>
+                        <li><strong>Compare Mode:</strong> A split-screen view allowing users to see version A vs. B of an output side-by-side to verify improvements.</li>
+                    </ul>
+
+                    <hr>
+
+                    <h2>Outcome</h2>
+                    <p>The redesign transformed the tool from a "developer-only" utility to a company-wide asset.</p>
+                    <blockquote>"Reduced average workflow clicks by 40% and improved user satisfaction scores (CSAT) by 25% within the first month."</blockquote>
+                `,
+                link: null
+            },
+            'fieldofficer': {
+                title: "Field Officer Companion App (POC)",
+                tag: "Mobile / Offline-First",
+                fullContent: `
+                    <div class="meta-grid">
+                        <div><span class="meta-label">Role</span><div class="meta-value">End-to-End UX</div></div>
+                        <div><span class="meta-label">Platform</span><div class="meta-value">Mobile (iOS/Android)</div></div>
+                        <div><span class="meta-label">Focus</span><div class="meta-value">Offline-First</div></div>
+                        <div><span class="meta-label">Result</span><div class="meta-value">50% Faster Visits</div></div>
+                    </div>
+                    <h2>The Challenge</h2>
+                    <p>Field officers operate in rural areas with poor connectivity. They were using a hybrid of paper notes and a sluggish web portal that required constant internet. This led to massive data loss, synchronization errors, and long delays (up to 3 days) in reporting site visits.</p>
+                    
+                    <h2>Strategy: Offline-First</h2>
+                    <p>We designed a native app architecture where the "source of truth" is the local device database, which syncs to the cloud only when a connection is available.</p>
+                    
+                    <h3>Key Decisions</h3>
+                    <ul>
+                        <li><strong>Local Persistence:</strong> All actions save locally immediately. No spinners waiting for server confirmation.</li>
+                        <li><strong>Optimistic UI:</strong> The interface confirms actions immediately (e.g., "Report Saved"), syncing in the background later.</li>
+                        <li><strong>Simplified Input:</strong> Replaced typing with geofencing (auto-location), smart dropdowns, and photo capture to speed up site visits.</li>
+                    </ul>
+
+                    <hr>
+
+                    <h2>Impact</h2>
+                    <p>The POC proved that a mobile-first approach could drastically improve efficiency.</p>
+                    <blockquote>"Proposed solution demonstrated a 50% reduction in time-spent-per-visit and eliminated data loss due to connectivity drops during user testing."</blockquote>
+                `,
+                link: null
+            },
+            'apiregistration': {
+                title: "API Registration & Strategy Execution Platform",
+                tag: "Internal Platform / B2B",
+                fullContent: `
+                    <div class="meta-grid">
+                        <div><span class="meta-label">Role</span><div class="meta-value">Product Designer (UX)</div></div>
+                        <div><span class="meta-label">Team</span><div class="meta-value">PM, Engineering, Design</div></div>
+                        <div><span class="meta-label">Duration</span><div class="meta-value">3 Weeks</div></div>
+                        <div><span class="meta-label">Domain</span><div class="meta-value">Internal Platform</div></div>
+                    </div>
+
+                    <h2>Overview</h2>
+                    <p>This project focused on designing an internal platform that enables teams to register external APIs and safely consume them inside decision strategies, without constant developer involvement.</p>
+
+                    <h2>Problem Statement</h2>
+                    <p>Business teams wanted to use external APIs inside decision strategies, but existing workflows were heavily dependent on engineering. Key challenges included:</p>
+                    <ul>
+                        <li>APIs are inherently technical and difficult for non‑technical users.</li>
+                        <li>No clear ownership of setup, testing, or output definitions.</li>
+                        <li>No visibility into execution success, failure, or errors.</li>
+                    </ul>
+                    <p>This resulted in low trust and frequent back‑and‑forth with engineering teams.</p>
+
+                    <h2>Design Approach: Role‑Based Ownership</h2>
+                    <p>I proposed a clear separation of responsibility to reduce cognitive load and prevent misuse:</p>
+                    <ul>
+                        <li><strong>Admin:</strong> API registration and output mapping</li>
+                        <li><strong>Business Analyst:</strong> Input mapping and decision logic</li>
+                        <li><strong>System:</strong> Execution, retries, and error handling</li>
+                    </ul>
+
+                    <h2>Key Solutions</h2>
+                    
+                    <h3>1. API Registration (Admin)</h3>
+                    <p>Structured configuration for endpoint, method, authentication, headers, and parameters. Includes the ability to test the API before saving, preventing broken APIs from entering the system.</p>
+
+                    <h3>2. Output Mapping (Admin)</h3>
+                    <p>Admin runs a sample API response, selects required fields, and renames them into business‑friendly variables. This creates a clean abstraction layer between technical JSON and business users.</p>
+
+                    <h3>3. Strategy Canvas (Business Analyst)</h3>
+                    <p>Drag‑and‑drop API nodes where users map inputs using existing strategy variables. Output variables are exposed as friendly names only, hiding the complexity of headers or raw responses.</p>
+
+                    <h3>4. Execution Feedback</h3>
+                    <p>Execution results are surfaced through test runs or logs, indicating success, failure, and errors, enabling users to validate and debug without engineering support.</p>
+
+                    <hr>
+
+                    <h2>Outcome & Impact</h2>
+                    <ul>
+                        <li>Clarified ambiguous PRD requirements through UX‑led thinking.</li>
+                        <li>Reduced dependency on engineering for validation and debugging.</li>
+                        <li>Enabled safe reuse of APIs across multiple strategies.</li>
+                    </ul>
+                `,
+                link: null
+            },
+            'microusability': {
+                title: "Micro Usability & Macro Impact",
+                tag: "UX Research / Medium",
+                desc: "Why Micro Usability Problems Deserve Macro Attention: An analysis of how minor interface frictions accumulate to create significant user churn.",
+                problem: "We often overlook small UI annoyances—like a button that's 2px off, a confusing label, or a generic error message—calling them 'micro' problems. However, cumulatively, these create a 'death by a thousand cuts' scenario that erodes user trust.",
+                approach: "I apply heuristic evaluation to identify these friction points and demonstrate how fixing them can lead to significant improvements in conversion and retention. I categorize issues into: <ul><li><strong>Visceral:</strong> Visual alignment and polish.</li><li><strong>Behavioral:</strong> Expected vs Actual interaction.</li><li><strong>Reflective:</strong> Long-term value perception.</li></ul>",
+                impact: "Enhanced perceived quality, reduced support tickets for 'trivial' issues, and improved long-term user retention.",
+                fullContent: `
+                    <div class="meta-grid">
+                        <div><span class="meta-label">Type</span><div class="meta-value">Case Study</div></div>
+                        <div><span class="meta-label">Context</span><div class="meta-value">Music App</div></div>
+                        <div><span class="meta-label">Focus</span><div class="meta-value">Micro-Interactions</div></div>
+                        <div><span class="meta-label">Result</span><div class="meta-value">Friction Reduction</div></div>
+                    </div>
+
+                    <h2>The Problem</h2>
+                    <p><strong>The Issue:</strong> When users interacted with the search widget in the Music app, they couldn’t clear the search input without first clicking the backspace key to reveal the clear icon.</p>
+                    <p><strong>The Why:</strong> This added unnecessary friction. It forced users to interrupt their natural flow just to modify a query, leading to cumulative frustration for frequent users.</p>
+
+                    <h2>The Solution</h2>
+                    <p>I designed a streamlined interaction pattern to eliminate this redundancy.</p>
+                    <ul>
+                        <li><strong>Immediate Access:</strong> The “clear” (cross) icon is made visible immediately when the user taps into the search field.</li>
+                        <li><strong>Streamlined Flow:</strong> This eliminates the need for the "backspace first" step, allowing users to clear input with a single click—similar to patterns seen in Instagram and LinkedIn.</li>
+                    </ul>
+
+                    <hr>
+
+                    <h2>Why It Matters</h2>
+                    <p>While seemingly minor, this missing icon has broader implications.</p>
+
+                    <h3>Impact on Users</h3>
+                    <ul>
+                        <li><strong>Reduced Frustration:</strong> Eliminates the "death by a thousand cuts" feeling of repetitive extra steps.</li>
+                        <li><strong>Perceived Quality:</strong> Users perceive app quality based on these micro-interactions. A seamless search experience signals a thoughtful product.</li>
+                    </ul>
+
+                    <h3>Business Impact</h3>
+                    <ul>
+                        <li><strong>Retention:</strong> Poor search UX can reduce conversion rates significantly. Seamless interactions keep users in the flow.</li>
+                        <li><strong>Brand Reputation:</strong> Small frustrations often lead to negative app store reviews. Fixing them protects the brand image.</li>
+                    </ul>
+
+                    <blockquote>"Small details make a big difference. Addressing micro-usability issues underscores the importance of user-centered design in creating experiences that users love and trust."</blockquote>
+                `,
+                link: "https://medium.com/@suryateja.s/case-study-why-micro-usability-problems-deserve-macro-attention-695eb37dec63"
+            },
+            'customaction': {
+                title: "Custom Action Creation for B2B Workflows",
+                tag: "B2B Platform",
+                fullContent: `
+                    <div class="meta-grid">
+                        <div><span class="meta-label">Role</span><div class="meta-value">End-to-End UX</div></div>
+                        <div><span class="meta-label">Users</span><div class="meta-value">Platform Managers</div></div>
+                        <div><span class="meta-label">Focus</span><div class="meta-value">No-Code Config</div></div>
+                        <div><span class="meta-label">Impact</span><div class="meta-value">Zero Runtime Errors</div></div>
+                    </div>
+
+                    <h2>Problem</h2>
+                    <p>Enterprise platforms often require custom actions to support unique business needs. While JSON offers flexibility, it is error-prone and difficult to validate for semi-technical users—leading to failed executions, low confidence, and duplicated efforts.</p>
+
+                    <h2>Solution Overview</h2>
+                    <p>I designed a guided custom action creation experience that progressively leads users from defining inputs to testing execution—without exposing system complexity.</p>
+
+                    <h3>Key Ideas</h3>
+                    <ul>
+                        <li><strong>Progressive Disclosure:</strong> Hiding technical complexity until needed.</li>
+                        <li><strong>Human-readable Mapping:</strong> Converting raw JSON parameters into user-friendly form fields.</li>
+                        <li><strong>Multi-layer Validation:</strong> Real-time JSON syntax validation plus structural checks against supported patterns.</li>
+                        <li><strong>Test-before-publish:</strong> A mandatory sandbox environment to build confidence.</li>
+                    </ul>
+
+                    <h3>JSON Validation as a UX Problem</h3>
+                    <p>Instead of validating only at save time, validation is progressive and contextual. We implemented real-time syntax highlighting and pre-test validation for missing inputs to prevent users from discovering errors after the action is reused.</p>
+
+                    <hr>
+
+                    <h2>Outcome</h2>
+                    <p>The final experience allows semi-technical users to confidently create, test, and reuse custom actions—reducing duplication, errors, and dependency on engineering teams.</p>
+                `,
+                link: null
+            }
+        };
+
+        const projectKeys = Object.keys(projects);
+        let currentProjectIndex = -1;
+
+        // --- Testimonials Logic ---
+        let currentSlide = 1;
+        const totalSlides = 3;
+        let slideInterval;
+
+        function showTestimonial(slideIndex) {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+            currentSlide = slideIndex;
+            
+            document.querySelectorAll('.testimonial-slide').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('[id^="dot-"]').forEach(el => {
+                el.classList.remove('dot-active');
+                el.classList.add('dot-inactive');
+            });
+
+            document.getElementById(`t-${currentSlide}`).classList.add('active');
+            const activeDot = document.getElementById(`dot-${currentSlide}`);
+            activeDot.classList.remove('dot-inactive');
+            activeDot.classList.add('dot-active');
+        }
+
+        function nextSlide() {
+            let next = currentSlide + 1;
+            if (next > totalSlides) next = 1;
+            showTestimonial(next);
+        }
+
+        slideInterval = setInterval(nextSlide, 5000);
+
+        // --- Modal Logic ---
+        const modal = document.getElementById('project-modal');
+        const modalContent = modal.querySelector('.modal-content-container');
+        const modalActionBtn = document.getElementById('modal-action-btn');
+
+        function openProject(projectId) {
+            currentProjectIndex = projectKeys.indexOf(projectId);
+            renderProject(projects[projectId]);
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('modal-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function navigateProject(direction) {
+            currentProjectIndex += direction;
+            if (currentProjectIndex < 0) currentProjectIndex = projectKeys.length - 1;
+            if (currentProjectIndex >= projectKeys.length) currentProjectIndex = 0;
+
+            const nextProjectId = projectKeys[currentProjectIndex];
+            const body = document.getElementById('modal-body');
+            body.style.opacity = '0';
+            setTimeout(() => {
+                renderProject(projects[nextProjectId]);
+                body.style.opacity = '1';
+            }, 200);
+        }
+
+        function renderProject(project) {
+            if (!project) return;
+            document.getElementById('modal-title').textContent = project.title;
+            document.getElementById('modal-tag').textContent = project.tag;
+            
+            const currentIndex = currentProjectIndex + 1;
+            const totalProjects = projectKeys.length;
+            document.getElementById('modal-counter').textContent = `${currentIndex} / ${totalProjects}`;
+
+            // Inject the FULL RICH CONTENT
+            document.getElementById('modal-content-area').innerHTML = project.fullContent;
+
+            // Handle Confidential Text Visibility
+            const confidentialText = document.getElementById('modal-confidential-text');
+            if (project.link) {
+                confidentialText.style.display = 'none';
+            } else {
+                confidentialText.style.display = 'block';
+            }
+
+            if (project.link) {
+                modalActionBtn.textContent = "Read on Medium";
+                modalActionBtn.href = project.link;
+                modalActionBtn.target = "_blank";
+                modalActionBtn.onclick = null;
+                modalActionBtn.innerHTML = 'Read on Medium <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>';
+            } else {
+                modalActionBtn.textContent = "Close View";
+                modalActionBtn.href = "#";
+                modalActionBtn.target = "";
+                modalActionBtn.onclick = (e) => {
+                    e.preventDefault();
+                    closeModal();
+                };
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('modal-open');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+            if (modal.classList.contains('modal-open')) {
+                if (e.key === 'ArrowLeft') navigateProject(-1);
+                if (e.key === 'ArrowRight') navigateProject(1);
+            }
+        });
+
+        function copyEmail() {
+            const email = "suryateja.shankapally@gmail.com";
+            const textArea = document.createElement("textarea");
+            textArea.value = email;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                if (document.execCommand('copy')) {
+                    const toast = document.getElementById('toast');
+                    toast.classList.remove('opacity-0', 'pointer-events-none');
+                    setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 3000);
+                }
+            } catch (err) { console.error('Fallback copy failed', err); }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
