@@ -300,25 +300,45 @@
         }
 
         /* Image Placeholder in Modal */
-        .img-placeholder {
-            width: 100%;
-            height: 16rem; /* h-64 */
-            background-color: var(--modal-placeholder-bg);
-            border: 1px dashed var(--modal-placeholder-border);
-            border-radius: 0.75rem; /* rounded-xl */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-tertiary);
-            margin-bottom: 2rem;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-        }
-        .img-placeholder:hover {
-            border-color: var(--text-secondary);
-            background-color: var(--icon-bg);
-        }
+.img-placeholder {
+  width: 100%;
+  height: 16rem; /* h-64 */
+  background-color: var(--modal-placeholder-bg);
+  border: 1px dashed var(--modal-placeholder-border);
+  border-radius: 0.75rem; /* rounded-xl */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+
+  /* SAFE transitions only */
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Hover state */
+.img-placeholder:hover {
+  border-color: var(--text-secondary);
+  background-color: var(--icon-bg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Image inside placeholder */
+.img-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* change to cover if needed */
+  display: block;
+  transition: opacity 0.3s ease;
+}
         .img-placeholder i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
@@ -1319,5 +1339,6 @@
     </script>
 </body>
 </html>F
+
 
 
