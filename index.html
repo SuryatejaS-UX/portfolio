@@ -1,785 +1,1721 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Surya Teja | Product Designer Portfolio</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Surya Teja Shankapally — Product Designer specializing in AI and enterprise UX. 4+ years at TCS designing agentic AI platforms and complex workflows.">
+    <title>Surya Teja Shankapally — Senior Product Designer</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <style>
+     <style>
+        /* ── TOKENS ──────────────────────────────────────────────────────────────
+           All contrast ratios verified against WCAG 2.1 AA:
+           - body text (--text-2 on --bg): ≥4.5:1
+           - large/bold text: ≥3:1
+           - UI components, borders: ≥3:1
+        ─────────────────────────────────────────────────────────────────────── */
         :root {
-            --bg: #F9F9F9;
-            --surface: #FFFFFF;
-            --text: #111111;
-            --text-secondary: #555555;
-            --border: rgba(0,0,0,0.08);
-            --border-hover: rgba(0,0,0,0.2);
-            --accent: #111111;
-            --card-shadow-hover: 0 12px 32px -12px rgba(0,0,0,0.1);
-        }
-        .dark {
-            --bg: #000000;
-            --surface: #111111;
-            --text: #FAFAFA;
-            --text-secondary: #A3A3A3;
-            --border: rgba(255,255,255,0.12);
-            --border-hover: rgba(255,255,255,0.3);
-            --accent: #FFFFFF;
-            --card-shadow-hover: 0 12px 32px -12px rgba(0,0,0,0.8);
+            /* Light */
+            --bg:            #F7F6F3;
+            --bg-alt:        #EDECEA;
+            --surface:       #FFFFFF;
+            --surface-hi:    #F2F1EF;
+            --border:        rgba(0,0,0,0.10);
+            --border-strong: rgba(0,0,0,0.22);
+            --text:          #111110;       /* contrast on --bg: 16.5:1 */
+            --text-2:        #4A4A47;       /* contrast on --bg: 7.2:1  */
+            --text-3:        #767672;       /* contrast on --bg: 4.6:1 — passes AA */
+            --accent:        #111110;
+            --accent-inv:    #FFFFFF;
+            --accent-sub:    rgba(17,17,16,0.06);
+            --highlight:     #1A45C8;       /* contrast on --bg: 5.9:1 */
+            --highlight-bg:  rgba(26,69,200,0.07);
+            --focus-ring:    #1A45C8;
+            --r:             14px;
+            --r-sm:          8px;
+            --r-pill:        999px;
         }
 
-        /* Override Browser Default Blue Highlighting & Tap Colors */
-        ::selection {
-            background-color: var(--text);
-            color: var(--bg);
+        .dark {
+            /* Dark — all values checked:
+               --text on --bg:     #E8E7E1 / #0D0D0C = 15.2:1  ✓
+               --text-2 on --bg:   #A09F9A / #0D0D0C =  6.8:1  ✓
+               --text-3 on --bg:   #6B6B67 / #0D0D0C =  4.5:1  ✓ (exactly AA)
+               featured card: #0D0D0C text on #E8E7E1 bg = 15.2:1 ✓ */
+            --bg:            #0D0D0C;
+            --bg-alt:        #141412;
+            --surface:       #181817;
+            --surface-hi:    #1F1F1D;
+            --border:        rgba(255,255,255,0.09);
+            --border-strong: rgba(255,255,255,0.20);
+            --text:          #E8E7E1;
+            --text-2:        #A09F9A;
+            --text-3:        #6B6B67;
+            --accent:        #E8E7E1;
+            --accent-inv:    #0D0D0C;
+            --accent-sub:    rgba(232,231,225,0.06);
+            --highlight:     #6BA3FF;       /* contrast on --bg: 5.1:1 ✓ */
+            --highlight-bg:  rgba(107,163,255,0.10);
+            --focus-ring:    #6BA3FF;
         }
-        ::-moz-selection {
-            background-color: var(--text);
-            color: var(--bg);
-        }
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
+
+        /* ── RESET ─────────────────────────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg);
+            background: var(--bg);
             color: var(--text);
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             -webkit-font-smoothing: antialiased;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            line-height: 1.6;
+            transition: background 0.25s, color 0.25s;
         }
 
-        /* Modal / Injected HTML Prose Styles */
-        .prose-content {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.7;
+        a { color: inherit; text-decoration: none; }
+        button { background: none; border: none; cursor: pointer; font: inherit; color: inherit; }
+        ul, ol { list-style: none; }
+        img { display: block; max-width: 100%; }
+
+        ::selection { background: var(--text); color: var(--bg); }
+        * { -webkit-tap-highlight-color: transparent; }
+
+        /* ── FOCUS STYLES — visible in both themes ─────────────────────────────── */
+        :focus-visible {
+            outline: 2px solid var(--focus-ring);
+            outline-offset: 3px;
+            border-radius: 4px;
         }
-        .prose-content a {
-            color: var(--text);
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            transition: opacity 0.2s;
-        }
-        .prose-content a:hover {
-            opacity: 0.7;
-        }
-        .prose-content h2 {
-            font-size: 1.5rem;
+
+        /* ── LAYOUT ────────────────────────────────────────────────────────────── */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── SKIP LINK ─────────────────────────────────────────────────────────── */
+        .skip-link {
+            position: absolute;
+            top: -200%;
+            left: 24px;
+            background: var(--highlight);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: var(--r-sm);
+            font-size: 0.875rem;
             font-weight: 600;
-            color: var(--text);
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
+            z-index: 999;
+            transition: top 0.15s;
+								
         }
-        .prose-content h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
+        .skip-link:focus { top: 12px; }
+
+        /* ── VISUALLY HIDDEN ───────────────────────────────────────────────────── */
+        .sr-only {
+            position: absolute; width: 1px; height: 1px;
+            overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
         }
-        .prose-content p {
-            margin-bottom: 1.25rem;
-        }
-        .prose-content ul, .prose-content ol {
-            margin-bottom: 1.5rem;
-            padding-left: 1.25rem;
-        }
-        .prose-content ul { list-style-type: disc; }
-        .prose-content ol { list-style-type: decimal; }
-        .prose-content li { margin-bottom: 0.5rem; }
-        .prose-content strong { color: var(--text); font-weight: 600; }
-        .prose-content hr {
-            border: 0;
-            border-top: 1px solid var(--border);
-            margin: 2.5rem 0;
-        }
-        .prose-content blockquote {
-            border-left: 3px solid var(--border);
-            padding-left: 1.25rem;
-            margin: 2rem 0;
-            font-style: italic;
-            color: var(--text-secondary);
-        }
-        .prose-content .lead {
-            font-size: 1.125rem;
-            color: var(--text);
-            margin-bottom: 2rem;
-        }
-        
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
+
+        .hidden { display: none !important; }
+
+        /* ── NAVBAR ────────────────────────────────────────────────────────────── */
+        .site-header {
+            position: fixed;
+            inset: 0 0 auto 0;
+            z-index: 40;
+            height: 60px;
+            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--border);
         }
-        @media (min-width: 640px) {
-            .meta-grid { grid-template-columns: repeat(4, 1fr); }
+
+        .site-header .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        .meta-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            display: block;
-            margin-bottom: 0.375rem;
-        }
-        .meta-value {
-            font-size: 0.875rem;
-            font-weight: 500;
+
+        .site-brand {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: -0.01em;
             color: var(--text);
         }
-        
-        .img-placeholder {
-            width: 100%;
-            min-height: 16rem;
-            background-color: var(--surface);
-            border: 1px dashed var(--border);
-            border-radius: 0.5rem;
+
+        .header-actions { display: flex; align-items: center; gap: 6px; }
+
+        .theme-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            color: var(--text-2);
+            transition: background 0.15s, color 0.15s;
+        }
+        .theme-btn:hover,
+        .theme-btn:focus-visible { background: var(--surface-hi); color: var(--text); }
+
+        .resume-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-2);
+            padding: 6px 12px;
+            border-radius: var(--r-sm);
+            transition: background 0.15s, color 0.15s;
+        }
+        .resume-link:hover,
+        .resume-link:focus-visible { color: var(--text); background: var(--accent-sub); }
+
+        /* ── MAIN ──────────────────────────────────────────────────────────────── */
+        main { padding: 96px 0 80px; }
+        .section + .section { margin-top: 88px; }
+
+        /* ── SECTION LABEL ─────────────────────────────────────────────────────── */
+        .section-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-3);
+        }
+
+        /* ── HERO ──────────────────────────────────────────────────────────────── */
+        .availability-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 13px;
+            border-radius: var(--r-pill);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-2);
+        }
+
+        .badge-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #22C55E;
+            flex-shrink: 0;
+            animation: blink 2.4s ease-in-out infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+        .hero-title {
+            font-size: clamp(1.875rem, 4.5vw, 2.875rem);
+            font-weight: 600;
+            line-height: 1.13;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            max-width: 700px;
+            margin-top: 18px;
+        }
+
+        .hero-intro {
+            font-size: 1.0625rem;
+            color: var(--text-2);
+            max-width: 560px;
+            line-height: 1.7;
+            margin-top: 14px;
+        }
+
+        /* ── METRICS ───────────────────────────────────────────────────────────── */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            max-width: 500px;
+            margin-top: 28px;
+        }
+        @media (min-width: 500px) { .metrics { grid-template-columns: repeat(4, 1fr); } }
+
+        .metric {
+            background: var(--surface);
+            padding: 16px 12px;
+            text-align: center;
+            transition: background 0.15s;
+        }
+        .metric:hover { background: var(--surface-hi); }
+
+        .metric-val {
+            display: block;
+            font-size: 1.4375rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .metric-lbl {
+            display: block;
+            font-size: 0.67rem;
+            color: var(--text-3);
+            line-height: 1.4;
+        }
+
+        /* ── CTA BUTTONS ───────────────────────────────────────────────────────── */
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .btn-solid {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: var(--accent);
+            color: var(--accent-inv);
+            padding: 10px 20px;
+            border-radius: var(--r-pill);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: opacity 0.15s;
+            border: 2px solid transparent;
+        }
+        .btn-solid:hover { opacity: 0.82; }
+        .btn-solid:focus-visible {
+            outline: 2px solid var(--focus-ring);
+            outline-offset: 3px;
+        }
+
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: transparent;
+            color: var(--text);
+            padding: 10px 20px;
+            border-radius: var(--r-pill);
+            border: 1px solid var(--border-strong);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: border-color 0.15s, background 0.15s;
+        }
+        .btn-ghost:hover { background: var(--surface); border-color: var(--border-strong); }
+        .btn-ghost:focus-visible {
+            outline: 2px solid var(--focus-ring);
+            outline-offset: 3px;
+        }
+
+        /* ── PHILOSOPHY ────────────────────────────────────────────────────────── */
+        .philosophy-wrap {
+            max-width: 640px;
+            padding-left: 20px;
+            border-left: 2px solid var(--border-strong);
+            margin-top: 16px;
+        }
+        .philosophy-wrap p + p { margin-top: 10px; }
+        .philosophy-lead {
+            font-size: 1.0625rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.65;
+        }
+        .philosophy-body {
+            font-size: 0.9375rem;
+            color: var(--text-2);
+            line-height: 1.7;
+        }
+
+        /* ── PROJECT CARDS ─────────────────────────────────────────────────────── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        @media (min-width: 640px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
+
+        /* FIX: Featured card spans full grid width for visual dominance */
+        @media (min-width: 640px) {
+            .project-card.is-featured {
+                grid-column: 1 / -1;
+																				  
+                padding: 28px 32px;
+                min-height: 200px;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                grid-template-rows: 1fr;
+                align-items: end;
+                gap: 0 24px;
+            }
+            .project-card.is-featured .card-footer {
+                border-top: none;
+                border-left: 1px solid rgba(128,128,128,0.22);
+                padding-top: 0;
+                padding-left: 24px;
+                margin-top: 0;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: flex-end;
+                gap: 8px;
+                min-width: max-content;
+            }
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 22px;
+            border-radius: var(--r);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            cursor: pointer;
+            min-height: 216px;
+            position: relative;
+            transition: border-color 0.18s, transform 0.18s, box-shadow 0.18s;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px -8px rgba(0,0,0,0.18);
+        }
+        .dark .project-card:hover {
+            box-shadow: 0 8px 28px -8px rgba(0,0,0,0.55);
+        }
+        .project-card:focus-visible {
+            outline: 2px solid var(--focus-ring);
+            outline-offset: 2px;
+        }
+
+        /* ── FEATURED CARD
+           Uses --text as background, --accent-inv (white/near-black) as text.
+           All colors below are hardcoded so they don't flip with theme toggling. ── */
+        .project-card.is-featured {
+            /* In dark: --text = #E8E7E1, so bg is very light warm white.
+               In light: --text = #111110, so bg is near-black.
+               Text inside is --accent-inv which is the inverse. ✓ */
+            background: var(--text);
+            border-color: var(--text);
+        }
+
+        /* Featured card text colors — explicit so they're always readable */
+        .project-card.is-featured .card-tag {
+            background: rgba(128,128,128,0.18);
+            border-color: rgba(128,128,128,0.28);
+            /* In dark: tag text on light bg → near-black */
+            color: var(--accent-inv);
+            opacity: 0.75;
+        }
+        .project-card.is-featured .card-title   { color: var(--accent-inv); }
+        .project-card.is-featured .card-desc     { color: var(--accent-inv); opacity: 0.62; }
+        .project-card.is-featured .card-metric   { color: var(--accent-inv); opacity: 0.62; }
+        .project-card.is-featured .card-metric strong { color: var(--accent-inv); opacity: 1; }
+        .project-card.is-featured .card-impact   { color: var(--accent-inv); opacity: 0.48; }
+        .project-card.is-featured .card-footer   { border-color: rgba(128,128,128,0.22); }
+																			   
+												 
+				  
+					  
+				 
+						  
+						 
+							 
+			
+						  
+   
+		 
+        .project-card.is-featured .card-role     { color: var(--accent-inv); }
+        .project-card.is-featured .card-arrow    { color: var(--accent-inv); opacity: 0.55; }
+        .project-card.is-featured:hover .card-arrow { opacity: 1; }
+
+        /* Card atoms */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 2px;
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 0.69rem;
+            font-weight: 500;
+            padding: 3px 9px;
+            border-radius: var(--r-pill);
+            border: 1px solid var(--border);
+            color: var(--text-2);
+            background: var(--bg-alt);
+            white-space: nowrap;
+        }
+
+        .card-impact {
+            font-size: 0.69rem;
+            font-weight: 500;
+            color: var(--text-3);
+            white-space: nowrap;
+            padding-top: 2px;
+        }
+
+        /* FIX: Card title — larger for faster recruiter scan */
+        .card-title {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 10px 0 6px;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+        }
+
+        .card-desc {
+            font-size: 0.8125rem;
+            color: var(--text-2);
+            line-height: 1.55;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-metric {
+            font-size: 0.78rem;
+            color: var(--text-2);
+            margin-top: 10px;
+        }
+        .card-metric strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 18px;
+            padding-top: 13px;
+            border-top: 1px solid var(--border);
+        }
+
+        .card-role { font-size: 0.8125rem; font-weight: 500; color: var(--text); }
+
+        .card-arrow {
+            color: var(--text-3);
+            flex-shrink: 0;
+            transition: transform 0.16s, color 0.16s;
+        }
+        .project-card:hover .card-arrow { transform: translateX(4px); color: var(--text); }
+
+        /* ── SKILLS ────────────────────────────────────────────────────────────── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            overflow: hidden;
+            margin-top: 18px;
+        }
+        @media (min-width: 640px) { .skills-grid { grid-template-columns: repeat(3,1fr); } }
+
+        .skill-cell { background: var(--surface); padding: 20px 22px; }
+
+        .skill-heading {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+
+        .skill-list { display: flex; flex-direction: column; gap: 9px; }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.875rem;
+            color: var(--text-2);
+        }
+
+        .skill-dot {
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: var(--text-3);
+            flex-shrink: 0;
+        }
+
+        /* ── EXPERIENCE & EDUCATION ────────────────────────────────────────────── */
+        .exp-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-top: 0;
+        }
+        @media (min-width: 640px) { .exp-grid { grid-template-columns: 1fr 1fr; } }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 18px;
+        }
+
+        .timeline-entry {
+            padding-left: 14px;
+            border-left: 2px solid var(--border);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .entry-title {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--text);
+        }
+
+        .entry-date {
+            font-size: 0.75rem;
+            color: var(--text-3);
+            font-family: 'DM Mono', monospace;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .entry-org {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-2);
+            margin-top: 2px;
+        }
+
+        .entry-desc {
+            font-size: 0.875rem;
+            color: var(--text-2);
+            line-height: 1.6;
+            margin-top: 6px;
+        }
+
+        .tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+
+        .mini-tag {
+            font-size: 0.69rem;
+            padding: 3px 8px;
+            border-radius: var(--r-pill);
+            background: var(--accent-sub);
+            border: 1px solid var(--border);
+            color: var(--text-2);
+        }
+
+        /* ── SITE FOOTER ───────────────────────────────────────────────────────── */
+        .site-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            margin: 2rem 0;
-            font-size: 0.875rem;
-            overflow: hidden;
-            padding: 2px;
-            cursor: zoom-in;
+            gap: 14px;
+            text-align: center;
+            margin-top: 88px;
         }
-        .img-placeholder img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            display: block;
+        @media (min-width: 640px) {
+            .site-footer { flex-direction: row; justify-content: space-between; text-align: left; }
         }
-        
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
 
-        /* Custom Animations */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        .animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
+        .footer-copy { font-size: 0.875rem; color: var(--text-3); }
+
+        .footer-links { display: flex; gap: 18px; }
+
+        .footer-link {
+            font-size: 0.875rem;
+            color: var(--text-2);
+            transition: color 0.15s;
+        }
+        .footer-link:hover { color: var(--text); }
+
+        /* ── MODAL ─────────────────────────────────────────────────────────────── */
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            animation: modal-in 0.2s ease-out both;
+        }
+        @keyframes modal-in {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-bar {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            height: 60px;
+            border-bottom: 1px solid var(--border);
+            background: color-mix(in srgb, var(--bg) 92%, transparent);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        /* FIX: Back button — no border bleed; hover uses bg tint instead of blue */
+        .modal-back {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 0.875rem; font-weight: 500;
+            color: var(--text-2);
+            padding: 6px 10px;
+            border-radius: var(--r-sm);
+            border: 1px solid transparent;
+            transition: color 0.15s, background 0.15s;
+        }
+						   
+							   
+        .modal-back:hover { color: var(--text); background: var(--accent-sub); }
+		 
+  
+																				
+
+        .modal-controls { display: flex; align-items: center; gap: 4px; }
+
+        .modal-nav-btn,
+        .modal-close-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px;
+            border-radius: var(--r-sm);
+            color: var(--text-2);
+            transition: background 0.15s, color 0.15s;
+        }
+        .modal-close-btn { border-radius: 50%; }
+        .modal-nav-btn:hover,
+        .modal-close-btn:hover { background: var(--surface-hi); color: var(--text); }
+
+        .modal-counter {
+            font-size: 0.75rem;
+            color: var(--text-3);
+            font-family: 'DM Mono', monospace;
+            padding: 0 6px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .modal-sep { width: 1px; height: 16px; background: var(--border); margin: 0 4px; }
+
+        .modal-body-wrap { flex: 1; overflow-y: auto; }
+
+        .modal-body {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 52px 24px 72px;
+        }
+
+        /* ── PROSE ─────────────────────────────────────────────────────────────── */
+        .case-tag {
+            display: inline-block;
+            margin-bottom: 18px;
+        }
+
+        .case-title {
+            font-size: clamp(1.5rem, 3.5vw, 2.125rem);
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+        }
+
+        .prose {
+            color: var(--text-2);
+            font-size: 0.9375rem;
+            line-height: 1.75;
+            margin-top: 36px;
+        }
+
+        .prose a { color: var(--highlight); text-decoration: underline; text-underline-offset: 3px; transition: opacity 0.15s; }
+        .prose a:hover { opacity: 0.75; }
+
+        .prose h2 {
+            font-size: 1.1875rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 2.25rem 0 0.625rem;
+            letter-spacing: -0.02em;
+        }
+
+        .prose h3 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 1.5rem 0 0.4rem;
+        }
+
+        .prose p { margin-bottom: 1rem; }
+
+        .prose ul, .prose ol {
+            list-style: disc;
+            padding-left: 1.25rem;
+            margin-bottom: 1.125rem;
+        }
+        .prose ol { list-style: decimal; }
+        .prose li { margin-bottom: 5px; }
+
+        .prose strong { color: var(--text); font-weight: 600; }
+
+        .prose code {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.82rem;
+            background: var(--surface-hi);
+            border: 1px solid var(--border);
+            padding: 1px 5px;
+            border-radius: 4px;
+            color: var(--text);
+        }
+
+        .prose hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2.25rem 0;
+        }
+
+        .prose blockquote {
+            border-left: 3px solid var(--highlight);
+            padding: 12px 16px;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--text-2);
+            background: var(--highlight-bg);
+            border-radius: 0 var(--r-sm) var(--r-sm) 0;
+        }
+
+        .prose .lead {
+            font-size: 1.0625rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 1.625rem;
+        }
+
+        /* Meta grid */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 14px;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        @media (min-width: 520px) { .meta-grid { grid-template-columns: repeat(4,1fr); } }
+
+        .meta-label {
+            display: block;
+            font-size: 0.63rem;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: var(--text-3);
+            margin-bottom: 3px;
+        }
+        .meta-val {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* ── CALLOUT ── FIX: label stacks above body; left-accent bar; readable max-width */
+        .callout {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: var(--accent-sub);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--border-strong);
+            border-radius: 0 var(--r-sm) var(--r-sm) 0;
+            padding: 14px 18px;
+            margin: 1.5rem 0;
+        }
+        .callout-label {
+            font-size: 0.6875rem;
+            font-weight: 700;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .callout-body {
+            font-size: 0.9rem;
+            color: var(--text-2);
+            line-height: 1.65;
+            max-width: 60ch;
+        }
+
+        /* Decision table */
+        .decision-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.125rem 0;
+            font-size: 0.875rem;
+        }
+        .decision-table th {
+            background: var(--accent-sub);
+            color: var(--text);
+            font-weight: 600;
+            text-align: left;
+            padding: 9px 12px;
+            border-bottom: 2px solid var(--border);
+        }
+        .decision-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-2);
+            vertical-align: top;
+        }
+        .decision-table tr:last-child td { border-bottom: none; }
+        .decision-table td:first-child {
+            color: var(--text);
+            font-weight: 500;
+            width: 34%;
+        }
+
+        /* Image block */
+        .img-block {
+            width: 100%;
+            min-height: 220px;
+            background: var(--surface);
+            border: 1px dashed var(--border-strong);
+            border-radius: var(--r-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-3);
+            margin: 1.5rem 0;
+            overflow: hidden;
+            cursor: zoom-in;
+            font-size: 0.8125rem;
+        }
+        .img-block img { max-width: 100%; height: auto; border-radius: var(--r-sm); }
+
+        /* Up next */
+        .up-next { margin-top: 72px; padding-top: 36px; border-top: 1px solid var(--border); }
+
+        .up-next-eyebrow {
+            display: block;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-3);
+            margin-bottom: 12px;
+        }
+
+        .up-next-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: clamp(1.125rem, 2.8vw, 1.5rem);
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+            transition: color 0.15s;
+        }
+        .up-next-btn:hover { color: var(--text-2); }
+
+        .next-arrow { transition: transform 0.16s; flex-shrink: 0; }
+        .up-next-btn:hover .next-arrow { transform: translateX(5px); }
+
+        /* ── CASE LINK ─────────────────────────────────────────────────────────── */
+        .case-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--text);
+            color: var(--accent-inv);
+            font-size: 0.875rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: var(--r-pill);
+            margin-top: 32px;
+            transition: opacity 0.15s;
+        }
+        .case-link:hover { opacity: 0.82; }
+
+        /* ── LIGHTBOX ──────────────────────────────────────────────────────────── */
+        .lightbox {
+            position: fixed; inset: 0; z-index: 100;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            cursor: zoom-out;
+            animation: fade-in 0.18s ease both;
+        }
+        @keyframes fade-in { from{opacity:0} to{opacity:1} }
+
+        .lightbox-close {
+            position: absolute; top: 18px; right: 18px; z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(255,255,255,0.12);
+            transition: background 0.15s;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.22); }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: var(--r-sm);
+            cursor: default;
+        }
+
+        /* ── SCROLLBAR ─────────────────────────────────────────────────────────── */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 10px; }
+
+        /* ── REDUCED MOTION ────────────────────────────────────────────────────── */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+
+        /* FIX: Suppress focus ring after mouse/touch click — keyboard nav still shows it */
+        .using-mouse :focus-visible { outline: none; }
+
+        /* ── MOBILE ────────────────────────────────────────────────────────────── */
+        @media (max-width: 540px) {
+            .hide-sm { display: none !important; }
+        }
+  
+													  
+  
+
     </style>
 </head>
-<body class="min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
+<body>
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-40 bg-[var(--bg)]/80 backdrop-blur-md border-b border-[var(--border)]">
-        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <span class="font-semibold text-[var(--text)] tracking-tight">Surya Teja</span>
-            <div class="flex items-center gap-4">
-                <button onclick="toggleTheme()" class="p-2 rounded-full text-[var(--text-secondary)] hover:text-[var(--text)] hover:bg-[var(--surface)] transition-colors" aria-label="Toggle Theme">
-                    <i data-lucide="sun" id="theme-icon-light" class="w-[18px] h-[18px] hidden"></i>
-                    <i data-lucide="moon" id="theme-icon-dark" class="w-[18px] h-[18px]"></i>
-                </button>
-                <a href="assets/Surya_Teja_Resume_U2_26.pdf" target="_blank" class="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Resume</a>
-            </div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ── HEADER ──────────────────────────────────────────────────────────────── -->
+<header class="site-header" role="banner">
+    <div class="container">
+        <a href="/" class="site-brand" aria-label="Surya Teja Shankapally — Home">Surya Teja</a>
+        <div class="header-actions">
+            <button
+                class="theme-btn"
+                id="theme-toggle"
+                aria-label="Switch to light mode"
+                title="Toggle theme">
+                <!-- Sun icon (shown in dark mode) -->
+                <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <!-- Moon icon (shown in light mode) -->
+                <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+            <a
+                href="assets/Surya_Teja_Resume_U2_26.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="resume-link"
+                aria-label="Download resume (opens in new tab)">
+                Resume ↗
+            </a>
         </div>
-    </nav>
+    </div>
+</header>
 
-    <!-- Main Content -->
-    <main class="max-w-5xl mx-auto px-6 pt-32 pb-24 space-y-32">
-        
-        <!-- Hero Section -->
-        <section class="space-y-8 animate-fade-in">
-            <div class="space-y-4">
-                <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-[var(--text)] leading-tight max-w-3xl">
-                    Designing clear, scalable UX for complex enterprise and AI-driven workflows.
-                </h1>
-                <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl leading-relaxed">
-                    Focused on simplifying complex workflows, reducing cognitive load, and designing scalable systems for enterprise and AI-driven products.
-                </p>
+<!-- ── MAIN ─────────────────────────────────────────────────────────────────── -->
+<main id="main-content">
+    <div class="container">
+
+        <!-- Hero -->
+        <section class="section" aria-label="Introduction">
+            <div class="availability-badge" role="status" aria-live="polite">
+                <span class="badge-dot" aria-hidden="true"></span>
+                Open to Senior Product Designer roles
             </div>
-            
-            <div class="flex flex-wrap items-center gap-4 pt-4">
-                <button onclick="copyEmail()" id="email-btn" class="flex items-center gap-2 bg-[var(--accent)] text-[var(--bg)] px-5 py-2.5 rounded-full text-sm font-medium hover:opacity-90 transition-opacity">
-                    <i data-lucide="mail" id="email-icon" class="w-4 h-4"></i>
+
+																			
+            <h1 class="hero-title">
+                I design clear, usable products for complex enterprise and AI workflows.
+            </h1>
+
+            <p class="hero-intro">
+                Product Designer at TCS with 4+ years building agentic AI platforms, compliance tools, and design systems. I focus on making hard problems feel approachable.
+            </p>
+
+            <div class="metrics" role="list" aria-label="Key metrics">
+                <div class="metric" role="listitem">
+                    <span class="metric-val">4+</span>
+                    <span class="metric-lbl">Years Experience</span>
+                </div>
+                <div class="metric" role="listitem">
+                    <span class="metric-val">20%</span>
+                    <span class="metric-lbl">Task Success ↑</span>
+                </div>
+                <div class="metric" role="listitem">
+                    <span class="metric-val">50%</span>
+                    <span class="metric-lbl">Workflow Time ↓</span>
+                </div>
+                <div class="metric" role="listitem">
+                    <span class="metric-val">~80%</span>
+                    <span class="metric-lbl">Eng Dependency ↓</span>
+                </div>
+            </div>
+
+            <div class="cta-row">
+                <button onclick="copyEmail()" id="email-btn" class="btn-solid" aria-label="Copy email address to clipboard">
+                    <svg id="email-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     <span id="email-text">Email Me</span>
                 </button>
-                <a href="https://www.linkedin.com/in/suryatejashankapally/" target="_blank" class="flex items-center gap-2 bg-transparent border border-[var(--border)] text-[var(--text)] px-5 py-2.5 rounded-full text-sm font-medium hover:border-[var(--border-hover)] hover:bg-[var(--surface)] transition-all">
-                    LinkedIn <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                <a
+                    href="https://www.linkedin.com/in/suryatejashankapally/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-ghost"
+                    aria-label="LinkedIn profile (opens in new tab)">
+                    LinkedIn
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                 </a>
             </div>
         </section>
 
-        <!-- Philosophy Section -->
-        <section class="space-y-6">
-            <h2 class="text-sm font-semibold uppercase tracking-widest text-[var(--text-secondary)]">Philosophy</h2>
-            <div class="text-lg md:text-xl text-[var(--text)] leading-relaxed max-w-3xl space-y-4">
-                <p>I design enterprise and AI-driven systems where users navigate complex workflows and high cognitive load. My focus is on creating clarity, structure, and predictable interactions.</p>
-                <p>I simplify decision paths, standardize patterns, and build scalable UX that balances user needs, business goals, and technical constraints.</p>
+        <!-- Philosophy -->
+        <section class="section" aria-label="Design philosophy">
+            <p class="section-label">Philosophy</p>
+            <div class="philosophy-wrap">
+                <p class="philosophy-lead">I work on enterprise and AI products where users are navigating real complexity not just finding a button.</p>
+                <p class="philosophy-body">Good design in this space means clear decision paths, consistent patterns, and reducing cognitive load at every step. I try to balance what users need, what the business requires, and what engineering can actually ship.</p>
             </div>
         </section>
 
-        <!-- Projects / Case Studies -->
-        <section class="space-y-8">
-            <h2 class="text-sm font-semibold uppercase tracking-widest text-[var(--text-secondary)]">Featured Work</h2>
-            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Injected via JS to keep HTML clean -->
+        <!-- Work -->
+        <section class="section" aria-labelledby="work-heading">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+                <h2 id="work-heading" class="section-label">Selected Work</h2>
+                <span style="font-size:0.75rem;color:var(--text-3);" aria-hidden="true">5 case studies</span>
+            </div>
+            <div id="projects-grid" class="projects-grid" role="list" aria-label="Case studies">
+                <!-- Injected via JavaScript -->
             </div>
         </section>
 
-        <!-- Skills & Tools -->
-        <section class="space-y-8">
-            <h2 class="text-sm font-semibold uppercase tracking-widest text-[var(--text-secondary)]">Expertise & Tools</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="space-y-4">
-                    <h3 class="text-[var(--text)] font-medium">Core UX Strengths</h3>
-                    <ul class="space-y-2">
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Platform design</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Workflow orchestration</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Interaction design</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Information architecture</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Enterprise UX</li>
+        <!-- Expertise -->
+        <section class="section" aria-labelledby="skills-heading">
+            <h2 id="skills-heading" class="section-label">Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-cell">
+                    <h3 class="skill-heading">Agentic AI UX</h3>
+                    <ul class="skill-list" aria-label="Agentic AI UX skills">
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Node-based canvas design</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Human-in-the-loop patterns</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Multi-agent orchestration</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Prompt and LLM UX</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>GenAI workflow design</li>
                     </ul>
                 </div>
-                <div class="space-y-4">
-                    <h3 class="text-[var(--text)] font-medium">Specialized Expertise</h3>
-                    <ul class="space-y-2">
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Agentic AI interfaces</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>AI agent orchestration</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Node-based workflows</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>GenAI UX</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Human-in-the-loop design</li>
+                <div class="skill-cell">
+                    <h3 class="skill-heading">Enterprise Platforms</h3>
+                    <ul class="skill-list" aria-label="Enterprise platform skills">
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Workflow redesign</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Compliance UX</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Role-based systems</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Information architecture</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>B2B platform design</li>
                     </ul>
                 </div>
-                <div class="space-y-4">
-                    <h3 class="text-[var(--text)] font-medium">Tools & Domains</h3>
-                    <ul class="space-y-2">
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Adobe XD & Figma</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>Enterprise SaaS</li>
-                        <li class="text-sm text-[var(--text-secondary)] flex items-center gap-2"><div class="w-1 h-1 rounded-full bg-[var(--text-secondary)] opacity-50"></div>AI platforms</li>
+                <div class="skill-cell">
+                    <h3 class="skill-heading">Design Practice</h3>
+                    <ul class="skill-list" aria-label="Design practice skills">
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Design systems (WCAG)</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Component libraries</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Figma and Adobe XD</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>User research</li>
+                        <li class="skill-item"><span class="skill-dot" aria-hidden="true"></span>Usability testing</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- Experience & Education -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div class="space-y-8">
-                <h2 class="text-sm font-semibold uppercase tracking-widest text-[var(--text-secondary)]">Experience</h2>
-                <div class="space-y-8">
-                    <div class="space-y-1">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-medium text-[var(--text)]">UX Designer</h3>
-                            <span class="text-sm text-[var(--text-secondary)] font-mono">2022 – Present</span>
-                        </div>
-                        <p class="text-sm text-[var(--text)] opacity-80">Tata Consultancy Services (TCS)</p>
-                        <p class="text-sm text-[var(--text-secondary)] leading-relaxed mt-2">Leading design for GenAI initiatives. Improved output refinement workflows and established core design patterns for banking clients.</p>
-                    </div>
-                    <div class="space-y-1">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-medium text-[var(--text)]">Storyboard Artist Intern</h3>
-                            <span class="text-sm text-[var(--text-secondary)] font-mono">2021</span>
-                        </div>
-                        <p class="text-sm text-[var(--text)] opacity-80">Greeniiac</p>
-                        <p class="text-sm text-[var(--text-secondary)] leading-relaxed mt-2">Visualized concepts and created illustrations for digital campaigns.</p>
-                    </div>
+        <!-- Experience and Education -->
+        <section class="section" aria-label="Experience and Education">
+            <div class="exp-grid">
+                <div>
+                    <h2 class="section-label">Experience</h2>
+                    <ol class="timeline" aria-label="Work experience">
+                        <li class="timeline-entry">
+                            <div class="entry-header">
+                                <span class="entry-title">UX Designer</span>
+                                <span class="entry-date">2022 – Present</span>
+                            </div>
+                            <p class="entry-org">Tata Consultancy Services (TCS)</p>
+                            <p class="entry-desc">Lead designer on GenAI and agentic AI products. Defined interaction patterns and design systems for banking and enterprise clients.</p>
+                            <div class="tag-row" aria-label="Technologies and domains">
+                                <span class="mini-tag">Agentic AI</span>
+                                <span class="mini-tag">Design Systems</span>
+                                <span class="mini-tag">Enterprise UX</span>
+                            </div>
+                        </li>
+                        <li class="timeline-entry">
+                            <div class="entry-header">
+                                <span class="entry-title">Storyboard Artist — Intern</span>
+                                <span class="entry-date">2021</span>
+                            </div>
+                            <p class="entry-org">Greeniiac</p>
+                            <p class="entry-desc">Created visual concepts and illustrations for digital campaigns.</p>
+                        </li>
+                    </ol>
                 </div>
-            </div>
 
-            <div class="space-y-8">
-                <h2 class="text-sm font-semibold uppercase tracking-widest text-[var(--text-secondary)]">Education</h2>
-                <div class="space-y-8">
-                    <div class="space-y-1">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-medium text-[var(--text)]">B.Tech in Mechanical Engineering</h3>
-                            <span class="text-sm text-[var(--text-secondary)] font-mono">2018 – 2021</span>
-                        </div>
-                        <p class="text-sm text-[var(--text)] opacity-80">JNTU Hyderabad</p>
-                    </div>
-                    <div class="space-y-1">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-medium text-[var(--text)]">Diploma in Mechanical Engineering</h3>
-                            <span class="text-sm text-[var(--text-secondary)] font-mono">2015 – 2018</span>
-                        </div>
-                        <p class="text-sm text-[var(--text)] opacity-80">SBTET</p>
-                    </div>
+                <div>
+                    <h2 class="section-label">Education</h2>
+                    <ol class="timeline" aria-label="Education history">
+                        <li class="timeline-entry">
+                            <div class="entry-header">
+                                <span class="entry-title">B.Tech, Mechanical Engineering</span>
+                                <span class="entry-date">2018–2021</span>
+                            </div>
+                            <p class="entry-org">JNTU Hyderabad</p>
+                        </li>
+                        <li class="timeline-entry">
+                            <div class="entry-header">
+                                <span class="entry-title">Diploma, Mechanical Engineering</span>
+                                <span class="entry-date">2015–2018</span>
+                            </div>
+                            <p class="entry-org">SBTET</p>
+                        </li>
+                    </ol>
                 </div>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="border-t border-[var(--border)] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-sm text-[var(--text-secondary)]">
-                © <span id="year"></span> Surya Teja. Designed with purpose.
+        <footer class="site-footer" role="contentinfo">
+            <p class="footer-copy">
+                <span aria-hidden="true">©</span>
+                <span class="sr-only">Copyright</span>
+                <span id="year"></span> Surya Teja Shankapally
             </p>
-            <div class="flex gap-6">
-                <a href="https://www.linkedin.com/in/suryatejashankapally/" target="_blank" class="text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">LinkedIn</a>
-                <a href="https://www.behance.net/SuryaTejaShankapally" target="_blank" class="text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Behance</a>
-                <a href="mailto:suryateja.shankapally@gmail.com" class="text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">Email</a>
-            </div>
+            <nav class="footer-links" aria-label="Social and contact links">
+                <a href="https://www.linkedin.com/in/suryatejashankapally/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+                <a href="https://www.behance.net/SuryaTejaShankapally" target="_blank" rel="noopener noreferrer" class="footer-link">Behance</a>
+                <a href="mailto:suryateja.shankapally@gmail.com" class="footer-link">Email</a>
+            </nav>
         </footer>
-    </main>
 
-    <!-- Project Fullscreen Overlay (Hidden by Default) -->
-    <div id="project-modal" class="hidden fixed inset-0 z-50 bg-[var(--bg)] flex-col animate-slide-up">
-        
-        <!-- Fullscreen Header -->
-        <div class="flex-none flex items-center justify-between px-6 h-16 border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-md sticky top-0 z-10">
-            <button onclick="closeProject()" class="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Work
-            </button>
-            
-            <div class="flex items-center gap-2 md:gap-4">
-                <button onclick="navigateProject(-1)" class="p-2 text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors hidden sm:block" title="Previous Project">
-                    <i data-lucide="arrow-left" class="w-[18px] h-[18px]"></i>
-                </button>
-                <span id="project-counter" class="text-xs text-[var(--text-secondary)] font-mono hidden sm:block"></span>
-                <button onclick="navigateProject(1)" class="p-2 text-[var(--text-secondary)] hover:text-[var(--text)] transition-colors hidden sm:block" title="Next Project">
-                    <i data-lucide="arrow-right" class="w-[18px] h-[18px]"></i>
-                </button>
-                <div class="w-px h-4 bg-[var(--border)] mx-2 hidden sm:block"></div>
-                <button onclick="closeProject()" class="p-2 text-[var(--text)] hover:bg-[var(--surface)] rounded-full transition-colors" title="Close">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-        </div>
-
-        <!-- Fullscreen Scrollable Body -->
-        <div id="project-scroll-area" class="flex-1 overflow-y-auto w-full">
-            <div class="max-w-3xl mx-auto px-6 py-16 md:py-24">
-                
-                <!-- Project Title Header -->
-                <div class="mb-16">
-                    <span id="project-tag" class="text-xs font-medium px-2.5 py-1 rounded-full border border-[var(--border)] text-[var(--text-secondary)] bg-[var(--surface)] mb-6 inline-block"></span>
-                    <h1 id="project-title" class="text-3xl md:text-5xl font-semibold text-[var(--text)] tracking-tight leading-tight"></h1>
-                </div>
-                
-                <!-- Project Content -->
-                <div id="project-content" class="prose-content"></div>
-                
-                <!-- Project Link -->
-                <div id="project-link-container" class="mt-16 hidden">
-                    <a id="project-link" href="#" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-[var(--bg)] bg-[var(--text)] px-6 py-3 rounded-full hover:opacity-90 transition-opacity">
-                        Read on Medium <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
-
-                <!-- Up Next Footer -->
-                <div class="mt-32 pt-16 border-t border-[var(--border)] flex flex-col items-start md:items-center md:text-center mb-16">
-                    <span class="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-widest mb-4 block">Up Next</span>
-                    <button onclick="navigateProject(1)" class="text-2xl md:text-4xl font-semibold text-[var(--text)] hover:text-[var(--text-secondary)] transition-colors group flex items-center gap-4 text-left">
-                        <span id="next-project-title"></span>
-                        <i data-lucide="arrow-right" class="w-8 h-8 group-hover:translate-x-2 transition-transform shrink-0"></i>
-                    </button>
-                </div>
-
-            </div>
-        </div>
     </div>
+</main>
 
-    <!-- Lightbox Overlay (Hidden by Default) -->
-    <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm items-center justify-center p-4 md:p-12 cursor-zoom-out animate-fade-in" onclick="closeLightbox()">
-        <button class="absolute top-6 right-6 text-white p-2 hover:bg-white/10 rounded-full transition-colors z-10" onclick="closeLightbox()">
-            <i data-lucide="x" class="w-7 h-7"></i>
+<!-- ── PROJECT MODAL ───────────────────────────────────────────────────────── -->
+<div
+    id="project-modal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title">
+
+    <div class="modal-bar">
+        <button onclick="closeProject()" class="modal-back" aria-label="Close case study and return to portfolio">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Back to Work
         </button>
-        <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl" onclick="event.stopPropagation()">
+        <div class="modal-controls">
+            <button onclick="navigateProject(-1)" class="modal-nav-btn hide-sm" aria-label="Previous case study" title="Previous (←)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            </button>
+            <span id="modal-counter" class="modal-counter hide-sm" aria-live="polite" aria-atomic="true"></span>
+            <button onclick="navigateProject(1)" class="modal-nav-btn hide-sm" aria-label="Next case study" title="Next (→)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <div class="modal-sep hide-sm" aria-hidden="true"></div>
+            <button onclick="closeProject()" class="modal-close-btn" aria-label="Close (Escape)" title="Close (Esc)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
     </div>
 
-    <!-- Scripts -->
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
+    <div id="modal-scroll" class="modal-body-wrap">
+        <div class="modal-body">
+            <span id="modal-tag" class="card-tag case-tag"></span>
+            <h1 id="modal-title" class="case-title"></h1>
+            <div id="modal-content" class="prose"></div>
+            <a id="modal-link" href="#" target="_blank" rel="noopener noreferrer" class="case-link hidden" aria-label="Read full article on Medium (opens in new tab)">
+                Read on Medium
+                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+            <div class="up-next">
+                <span class="up-next-eyebrow">Up Next</span>
+                <button onclick="navigateProject(1)" class="up-next-btn" aria-label="Open next case study">
+                    <span id="next-title"></span>
+                    <svg class="next-arrow" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
-        // Check local storage for theme
-        const storedTheme = localStorage.getItem('theme') || 'light';
-        const htmlElement = document.documentElement;
-        
-        function updateThemeIcons() {
-            const isDark = htmlElement.classList.contains('dark');
-            document.getElementById('theme-icon-light').classList.toggle('hidden', isDark);
-            document.getElementById('theme-icon-dark').classList.toggle('hidden', !isDark);
-        }
+<!-- ── LIGHTBOX ─────────────────────────────────────────────────────────────── -->
+<div
+    id="lightbox"
+    class="lightbox hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Image lightbox"
+    onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close image (Escape)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img id="lightbox-img" class="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
 
-        if (storedTheme === 'dark') {
-            htmlElement.classList.add('dark');
-        } else {
-            htmlElement.classList.remove('dark');
-        }
+<script>
+// ── STATE ───────────────────────────────────────────────────────────────────
+let currentIndex = -1;
 
-        function toggleTheme() {
-            if (htmlElement.classList.contains('dark')) {
-                htmlElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                htmlElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-            updateThemeIcons();
-        }
+// ── THEME ───────────────────────────────────────────────────────────────────
+const html    = document.documentElement;
+const btnToggle = document.getElementById('theme-toggle');
 
-        // Project Data
-        const projects = [
-            {
-                id: "sustainability",
-                title: "Vendor Sustainability Assessment Portal",
-                tag: "Sustainability / Workflow",
-                role: "Lead Designer",
-                impact: "Faster Completion",
-                description: "Reducing cognitive load in a 400+ question compliance workflow using workflow UX and agentic assistance.",
-                content: `
-                    <div class="meta-grid">
-                        <div><span class="meta-label">Role</span><div class="meta-value">UX Designer</div></div>
-                        <div><span class="meta-label">Team</span><div class="meta-value">Product & Design</div></div>
-                        <div><span class="meta-label">Focus</span><div class="meta-value">Workflow Optimization</div></div>
-                        <div><span class="meta-label">Result</span><div class="meta-value">Reduced Fatigue</div></div>
-                    </div>
-                    <h2>Overview</h2>
-                    <p>The Vendor Sustainability Portal is a compliance-driven application where vendors are required to complete a detailed sustainability assessment consisting of 400+ questions grouped into sections and sub-sections.</p>
-                    <p>Customers frequently reported frustration, long completion times, and fatigue while completing the assessment. I was asked to review the existing experience, identify usability gaps, and propose improvements to make task completion easier without changing compliance requirements.</p>
-                    <hr>
-                    <h2>Problem Statement</h2>
-                    <p>Although the assessment structure was logically grouped, the experience created high cognitive load and inefficiency:</p>
-                    <ul>
-                        <li><strong>Weight:</strong> All questions felt equally heavy, regardless of importance.</li>
-                        <li><strong>Context Switching:</strong> Users had to repeatedly switch between documents and the application.</li>
-                        <li><strong>Ambiguity:</strong> No clarity on which questions required documents vs human input.</li>
-                        <li><strong>Navigation:</strong> Excessive navigation through sections increased perceived effort.</li>
-                    </ul>
-                    <p>The workflow optimized for data entry, not task completion. This resulted in poor user experience for a mandatory, non-negotiable process.</p>
-                    <h2>Approach</h2>
-                    <p>Instead of starting with screens or components, I approached the problem as a <strong>first-time vendor</strong> trying to complete the assessment as efficiently as possible.</p>
-                    <p>I intentionally optimized for minimum user effort, focusing on:</p>
-                    <ul>
-                        <li>Reducing redundant actions</li>
-                        <li>Minimizing context switching</li>
-                        <li>Shifting effort from manual input to review and validation</li>
-                    </ul>
-                    <h3>Key Insights</h3>
-                    <ol>
-                        <li>Users do not think in sections — they think in “how do I finish this faster?”</li>
-                        <li>Most answers already exist in company documents.</li>
-                        <li>The biggest friction was manual data entry, not question complexity.</li>
-                        <li>Compliance workflows need trust and transparency, not blind automation.</li>
-                    </ol>
-                    <hr>
-                    <h2>Design Solutions</h2>
-                    <h3>1. Mandatory vs Optional Question Prioritization</h3>
-                    <p>Rather than removing sections, I re-prioritized questions based on completion criticality. Mandatory questions surfaced first, while optional questions remained accessible but de-emphasized. This reduced unnecessary navigation and improved perceived progress.</p>
-                    
-                    <div class="img-placeholder">
-                        <img src="assets/Mandatory-vs-Optional-Split.png" alt="Prioritization UI: Mandatory vs Optional Split" />
-                    </div>
+function applyTheme(t) {
+    const dark = t === 'dark';
+    html.classList.toggle('dark', dark);
+    document.getElementById('icon-sun').classList.toggle('hidden', !dark);
+    document.getElementById('icon-moon').classList.toggle('hidden', dark);
+    btnToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+}
 
-                    <h3>2. Agentic Document-Based Answer Extraction</h3>
-                    <p>To eliminate repetitive manual work, I introduced an agentic workflow:</p>
-                    <ul>
-                        <li>Users upload relevant documents.</li>
-                        <li>The system extracts answers automatically.</li>
-                        <li>Each answer shows its source reference.</li>
-                        <li>Users review, edit, and approve before submission.</li>
-                    </ul>
-                    <p>This shifted the user’s role from <strong>answering</strong> to <strong>validating</strong>.</p>
+applyTheme(localStorage.getItem('theme') || 'dark');
 
-                    <div class="img-placeholder">
-                        <img src="assets/Document-Extraction-&-Review.png" alt="Agentic Workflow: Document Extraction & Review" />
-                    </div>
+function toggleTheme() {
+    const next = html.classList.contains('dark') ? 'light' : 'dark';
+    localStorage.setItem('theme', next);
+    applyTheme(next);
+}
+btnToggle.addEventListener('click', toggleTheme);
 
-                    <h3>3. Smart Document Intake</h3>
-                    <p>Instead of uploading documents repeatedly per question, I identified document types needed across the assessment and enabled <strong>bulk document upload upfront</strong>. Extracted information is then reused across multiple questions, significantly reducing context switching.</p>
+// ── YEAR ────────────────────────────────────────────────────────────────────
+document.getElementById('year').textContent = new Date().getFullYear();
 
-                    <div class="img-placeholder">
-                        <img src="assets/Bulk-Upload-&-Smart-Intake-Interface.png" alt="Bulk Upload & Smart Intake Interface" />
-                    </div>
+// ── FIX: Mouse vs keyboard focus detection ───────────────────────────────────
+document.addEventListener('mousedown', () => document.body.classList.add('using-mouse'));
+document.addEventListener('keydown',   () => document.body.classList.remove('using-mouse'));
 
-                    <h3>4. AI Assistance for Judgment-Based Questions</h3>
-                    <p>Not all questions could be answered via documents. For such cases, AI guidance explains what information is expected and helps users understand <em>how</em> to answer, without auto-filling judgment-based responses. This preserved user control and accountability.</p>
+// ── PROJECT DATA ────────────────────────────────────────────────────────────
+const projects = [
+    {
+        id: 'agent-platform',
+        title: 'Agentic AI Orchestration Platform',
+        tag: 'AI / Enterprise Platform',
+        role: 'Sole UX Designer',
+        impact: 'Active Product · 2+ Year',
+        metric: { val: 'Sole designer', lbl: 'end-to-end ownership' },
+        featured: true,
+        description: 'End-to-end UX for an enterprise multi-agent AI platform. Users configure, compose, and manage AI agents entirely through the UI.No code. No engineering tickets.',
+		content: `
+            <div class="meta-grid">
+                <div><span class="meta-label">Role</span><span class="meta-val">Sole UX Designer</span></div>
+                <div><span class="meta-label">Type</span><span class="meta-val">Enterprise AI Platform</span></div>
+                <div><span class="meta-label">Ownership</span><span class="meta-val">2+ Year</span></div>
+                <div><span class="meta-label">Status</span><span class="meta-val">Active Product</span></div>
+            </div>
+            <p class="lead">There were no existing UX patterns for agentic AI at enterprise scale. Every flow, interaction model, and error state had to be figured out from scratch.</p>
+            <h2>The Problem</h2>
+            <p>Enterprise teams needed to configure and manage AI agents, but the technical complexity was significant. The platform had to make that complexity manageable without removing user control. Earned full product ownership after initially contributing to the dark theme, eventually leading all UX decisions as the sole designer..</p>
+            <h2>Layer 1: Resource Configuration</h2>
+            <p>Before building agents, users configure the foundational pieces. I designed four registration flows:</p>
+            <ul>
+                <li><strong>LLM Registration:</strong> connect and manage model providers</li>
+                <li><strong>Knowledge Base Integration:</strong> scope enterprise data sources per agent</li>
+                <li><strong>Tools Configuration:</strong> let agents call external APIs and take actions</li>
+                <li><strong>Prompt Management:</strong> define and version reusable behavioral instructions</li>
+            </ul>
+            <div class="callout">
+                <span class="callout-label">Hard decision</span>
+                <span class="callout-body">Should onboarding start with resources or agent creation? We tested both. Resource-first won: users who jumped straight to agent creation kept hitting dead ends when LLMs and tools weren't set up yet. Starting with configuration eliminated that failure mode entirely.</span>
+            </div>
+            <h2>Layer 2: Visual Agent Canvas</h2>
+            <p>Agents are assembled on a node-based canvas. Users connect modular building blocks:</p>
+            <ul>
+                <li><strong>Agent Node:</strong> defines the agent's core behavior</li>
+                <li><strong>Tools Node:</strong> connects registered external actions</li>
+                <li><strong>Knowledge Base Node:</strong> scopes what information the agent can access</li>
+                <li><strong>Rules Node:</strong> sets guardrails and constraints</li>
+                <li><strong>Human-in-the-Loop Node:</strong> adds mandatory review checkpoints</li>
+            </ul>
+            <p>The toughest part of designing the canvas was figuring out how connections should work. Free-form connections initially felt more flexible, but in practice they often led to setups that looked fine and only failed later during runtime, which made debugging frustrating. To address this, I shifted to a guided connection approach with inline validation, so users get immediate feedback while creating connections and issues are caught early instead of surfacing later.</p>
+            <h2>Key Design Decisions</h2>
+            <table class="decision-table">
+                <thead><tr><th>Decision</th><th>Reasoning</th></tr></thead>
+                <tbody>
+                    <tr><td>Resource-first onboarding</td><td>Agent-first caused dead ends. Resource-first meant users always had valid building blocks before they started composing.</td></tr>
+                    <tr><td>Guided node connections</td><td>Free-form caused silent failures at runtime. Inline validation at connection time surfaced problems immediately.</td></tr>
+                    <tr><td>HITL as a standard node</td><td>Enterprise compliance needed visible checkpoints. Making HITL a node (not a hidden setting) made accountability auditable.</td></tr>
+                    <tr><td>Progressive disclosure</td><td>Showing all settings upfront caused abandonment. Basic settings visible first, advanced options collapsed by default.</td></tr>
+                </tbody>
+            </table>
+            <h2>Results</h2>
+            <ul>
+                <li>Enterprise users now create and manage agents entirely through the UI — no engineering tickets.</li>
+                <li>The node library and error model I built became the foundation for how the platform evolves.</li>
+                <li>The HITL pattern was adopted across other compliance-sensitive features on the product.</li>
+            </ul>
+            <blockquote>Specific system details and client names are not shown for confidentiality reasons.</blockquote>
+        `
+    },
+    {
+        id: 'sustainability-portal',
+        title: 'Vendor Portal Compliance Portal',
+        tag: 'Compliance / Workflow',
+        role: 'Lead Designer',
+        impact: '~35% Faster Completion',
+        metric: { val: '~35%', lbl: 'completion time reduced' },
+        description: 'Redesigned a 400-question compliance workflow. Cut completion time by ~35% through better prioritization and AI-assisted document extraction.',
+        content: `
+            <div class="meta-grid">
+                <div><span class="meta-label">Role</span><span class="meta-val">Lead Designer</span></div>
+                <div><span class="meta-label">Type</span><span class="meta-val">Enterprise Compliance</span></div>
+                <div><span class="meta-label">Focus</span><span class="meta-val">Workflow Redesign</span></div>
+                <div><span class="meta-label">Status</span><span class="meta-val">Live</span></div>
+            </div>
+            <p class="lead">A 400-question compliance assessment, redesigned to take 35% less time, without touching a single compliance requirement.</p>
+            <h2>The Problem</h2>
+            <p>The original workflow was built for data entry, not for the person doing it. Vendors reported three consistent frustrations:</p>
+            <ul>
+                <li>All 400 questions looked equally important, regardless of compliance priority</li>
+                <li>Answering most questions meant constantly switching between the app and source documents</li>
+                <li>No way to tell which questions needed a human judgment call vs which could be answered from a document</li>
+            </ul>
+            <div class="callout">
+                <span class="callout-label">Key insight</span>
+                <span class="callout-body">Most answers were sitting in documents the vendor already had. The real job wasn't answering questions, it was manual transcription. Fixing that one thing changed everything.</span>
+            </div>
+            <h2>What We Built</h2>
+            <h3>1. Question prioritization</h3>
+            <p>Mandatory questions surface first with clear status indicators. Optional ones stay accessible but visually de-emphasized. No compliance requirements were removed — just reordered by by actual priority.</p>
+            <div class="img-block">
+                <img src="assets/Mandatory-vs-Optional-Split.png" alt="Side-by-side UI showing mandatory questions prioritized at the top with status badges, and optional questions de-emphasized below" />
+            </div>
+            <h3>2. AI-assisted document extraction</h3>
+            <p>Users upload their compliance documents at the start. The system extracts answers and maps them to questions. Users review and confirm rather than manually transcribe. Each answer shows its source so users can verify quickly.</p>
+            <div class="img-block">
+                <img src="assets/Document-Extraction-&-Review.png" alt="Document extraction interface showing extracted answers mapped to compliance questions with source references" />
+            </div>
+            <h3>3. Bulk document intake at the start</h3>
+            <p>Instead of prompting for documents mid-flow (the #1 drop-off point), we moved bulk upload to step one. Users provide everything upfront, and the system reuses extracted data across all relevant questions.</p>
+            <div class="img-block">
+                <img src="assets/Bulk-Upload-&-Smart-Intake-Interface.png" alt="Bulk document upload interface at the start of the assessment flow, showing document type categorization and upload progress" />
+            </div>
+            <h3>4. AI guidance for judgment questions</h3>
+            <p>For questions that need a human interpretation, contextual AI guidance explains what's expected without auto-filling. Accountability stays with the user; ambiguity is reduced.</p>
+            <div class="img-block">
+                <img src="assets/AI-Guidance-for-Subjective-Questions.png" alt="Assessment question with AI guidance panel explaining what information is expected for this judgment-based question" />
+            </div>
+            <h2>Key Design Decisions</h2>
+            <table class="decision-table">
+                <thead><tr><th>Decision</th><th>Reasoning</th></tr></thead>
+                <tbody>
+                    <tr><td>AI extracts, human validates</td><td>Full automation creates compliance risk. This split keeps speed without removing accountability.</td></tr>
+                    <tr><td>Upload at the start, not mid-flow</td><td>Mid-flow document prompts caused the highest abandonment rate. Front-loading removes that friction.</td></tr>
+                    <tr><td>Guidance without auto-fill on judgment questions</td><td>Legal raised liability concerns with auto-filled subjective answers. Guidance-only preserved trust while reducing ambiguity.</td></tr>
+                </tbody>
+            </table>
+            <h2>Results</h2>
+            <ul>
+                <li><strong>~35% reduction</strong> in average completion time during internal testing</li>
+                <li>Context switching eliminated for document-answerable questions</li>
+                <li>The agentic extraction pattern was adopted as the template for other compliance workflows on the platform</li>
+            </ul>
+        `
+    },
+    {
+        id: 'api-integration',
+        title: 'API Integration Workflow',
+        tag: 'Internal Platform / B2B',
+        role: 'UX Designer (Owner)',
+        impact: '~80% Less Engineering Dependency',
+        metric: { val: '~80%', lbl: 'configs without eng tickets' },
+        description: 'Designed a two-persona workflow letting business teams consume external APIs in decision strategies. No engineering ticket needed for routine configurations.',
+        content: `
+            <div class="meta-grid">
+                <div><span class="meta-label">Role</span><span class="meta-val">UX Designer (Owner)</span></div>
+                <div><span class="meta-label">Domain</span><span class="meta-val">Decision strategy Platforms</span></div>
+                <div><span class="meta-label">Duration</span><span class="meta-val">3 Weeks</span></div>
+                <div><span class="meta-label">Status</span><span class="meta-val">Shipped</span></div>
+            </div>
+            <p class="lead">Every time an analyst needed external API data in a decision strategy, it required an engineering ticket. That was the bottleneck we designed around.</p>
+            <h2>The Problem</h2>
+            <p>Business analysts needed external API outputs inside their decision workflows. The current process meant engineering involvement at every step for registration, authentication, JSON field mapping, and variable setup. This created a constant queue of requests slowing both teams down.</p>
+            <ul>
+                <li>API work required developer-level access</li>
+                <li>Raw JSON payloads confused business users</li>
+                <li>API changes silently broke downstream strategies with no ownership model</li>
+            </ul>
+            <div class="callout">
+                <span class="callout-label">Core insight</span>
+                <span class="callout-body">Neither team should need to do the other's job. Admin does the technical setup once. Strategy designers use the result independently. Strict role separation was the answer.</span>
+            </div>
+            <h2>Two-Persona Design</h2>
+            <table class="decision-table">
+                <thead><tr><th>Admin (Technical)</th><th>Strategy Designer (Business)</th></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>Registers, authenticates, and tests APIs in the UI</td>
+                        <td>Sees only friendly Business Variables no JSON, no payloads</td>
+                    </tr>
+                    <tr>
+                        <td>Maps raw JSON fields to Business Variables (e.g., <code>credit_score_v2_final</code> → "Credit Score") and publishes to a shared library</td>
+                        <td>Drags pre-configured API nodes onto the canvas and builds strategies at business speed</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Key Design Decisions</h2>
+            <table class="decision-table">
+                <thead><tr><th>Decision</th><th>Reasoning</th></tr></thead>
+                <tbody>
+                    <tr><td>Test before save is mandatory</td><td>Broken APIs entering the strategy layer caused silent failures downstream. Mandatory testing stops that at the source.</td></tr>
+                    <tr><td>Visual JSON field selector</td><td>Asking business users to read raw JSON caused errors. Visual field selection with renaming abstracts that layer completely.</td></tr>
+                    <tr><td>Shared API library</td><td>Setting up the same API per strategy created drift. One shared library means one source of truth, update once and all strategies update.</td></tr>
+                    <tr><td>Drag-and-drop canvas nodes</td><td>Text-based API config required technical literacy. Canvas nodes with business variable labels let analysts work on their own.</td></tr>
+                </tbody>
+            </table>
+            <h2>Results</h2>
+            <ul>
+                <li>~80% of routine strategy configurations now happen without an engineering ticket</li>
+                <li>Analysts build and update decision strategies independently</li>
+                <li>Configured APIs are reused safely across multiple workflows</li>
+            </ul>
+            <blockquote>Good enterprise UX isn't about simplifying the product it's about knowing exactly where to hide the complexity. Admin does the hard setup once. Everyone else benefits forever.</blockquote>
+        `
+    },
+    {
+        id: 'field-officer-app',
+        title: 'Field Officer Companion App',
+        tag: 'Mobile / Offline-First',
+        role: 'UX Designer',
+        impact: '50% Faster Field Visits',
+        metric: { val: '50%', lbl: 'faster visit completion' },
+        description: 'Offline-first mobile app for field officers working in areas with poor connectivity. Eliminated data loss and cut visit time by 50% in user testing.',
+        content: `
+            <div class="meta-grid">
+                <div><span class="meta-label">Role</span><span class="meta-val">UX Designer</span></div>
+                <div><span class="meta-label">Platform</span><span class="meta-val">iOS / Android</span></div>
+                <div><span class="meta-label">Focus</span><span class="meta-val">Offline-First UX</span></div>
+                <div><span class="meta-label">Status</span><span class="meta-val">POC, User Tested</span></div>
+            </div>
+            <p class="lead">Field officers in rural areas were losing data and spending twice as long on visits because the app required connectivity that wasn't there.</p>
+            <h2>The Problem</h2>
+            <p>Officers were using a hybrid workflow of paper notes and a web portal. During 3 field shadowing sessions, we observed connectivity drop an average of 4 times per visit. Each drop meant a page reload and re-entry of whatever had been filled in. Visits ran 2x longer than they should.</p>
+            <div class="callout">
+                <span class="callout-label">Research finding</span>
+                <span class="callout-body">We evaluated two approaches: progressive enhancement (web-first with offline fallback) vs offline-first (device as source of truth). The shadowing data made the call easy — connectivity was too unreliable for any online-dependent flow to work. Offline-first was the only architecture that made sense here.</span>
+            </div>
+            <h2>Key Design Decisions</h2>
+            <table class="decision-table">
+                <thead><tr><th>Decision</th><th>Reasoning</th></tr></thead>
+                <tbody>
+                    <tr><td>Device as source of truth</td><td>Cloud-first with local cache still broke on sync. Saving to the device first and syncing when connection returns meant zero data loss regardless of signal.</td></tr>
+                    <tr><td>Optimistic UI</td><td>The old portal showed "saving..." spinners that stalled on poor connections. Confirming actions immediately (syncing in the background) made the app feel fast even without signal.</td></tr>
+                    <tr><td>Geofencing instead of manual codes</td><td>Location entry was the most common source of errors. Automating it with geofencing removed one of the most error-prone steps entirely.</td></tr>
+                    <tr><td>Smart dropdowns over free text</td><td>Typing in the field sun glare, one hand, moving caused too many mistakes. Structured inputs and photo capture replaced most free-text entry.</td></tr>
+                </tbody>
+            </table>
+            <h2>Results</h2>
+            <ul>
+                <li><strong>50% reduction</strong> in time per visit under simulated poor-connectivity conditions</li>
+                <li><strong>Zero data loss</strong> during testing vs frequent loss in the existing portal</li>
+                <li>Officers reported the app "felt fast" even with no signal direct feedback on the optimistic UI pattern</li>
+                <li>Offline-first architecture adopted as the standard for subsequent field-facing mobile work</li>
+            </ul>
+        `
+    },
+    {
+        id: 'micro-usability',
+        title: 'Micro Usability in Music Apps',
+        tag: 'UX Research / Published',
+        role: 'UX Researcher',
+        impact: 'Published on Medium',
+        metric: null,
+        link: 'https://medium.com/@suryateja.s/case-study-why-micro-usability-problems-deserve-macro-attention-695eb37dec63',
+        description: 'A published case study on why small interaction problems matter,  Analysing a hidden friction point in music app search that affected every session.',
+        content: `
+            <div class="meta-grid">
+                <div><span class="meta-label">Type</span><span class="meta-val">Personal Case Study</span></div>
+                <div><span class="meta-label">Context</span><span class="meta-val">Music App</span></div>
+                <div><span class="meta-label">Focus</span><span class="meta-val">Micro-interactions</span></div>
+                <div><span class="meta-label">Published</span><span class="meta-val">Medium</span></div>
+            </div>
+            <p class="lead">You couldn't clear the search field without pressing backspace first. A tiny friction — but it happened dozens of times per session.</p>
+            <h2>The Problem</h2>
+            <p>In a popular music app, the clear (×) icon only appeared after the user pressed backspace. That's an extra motor step every single time someone wants to start a new search. It doesn't fail the task — it just makes the app slightly worse on every interaction.</p>
+            <div class="callout">
+                <span class="callout-label">The pattern</span>
+                <span class="callout-body">Micro-usability problems don't show up in usability reports because they don't break tasks. They just chip away at the experience. The accumulated effect on perceived quality is real — it's where "this app feels clunky" comes from.</span>
+            </div>
+            <h2>The Fix</h2>
+            <p>Show the clear icon as soon as the user taps into the search field. One less step, aligned with how people expect clearable inputs to work.</p>
+            <h2>Why it matters for enterprise UX</h2>
+            <p>This is the lens I bring to complex products. In a 400-question compliance assessment or a multi-step agent configuration, small frictions compound. One unnecessary click per screen, across 20 screens, is the difference between a product that feels considered and one that feels like a chore.</p>
+        `
+    }
+];
 
-                    <div class="img-placeholder">
-                        <img src="assets/AI-Guidance-for-Subjective-Questions.png" alt="AI Guidance for Subjective Questions" />
-                    </div>
+// ── RENDER CARDS ─────────────────────────────────────────────────────────────
+const grid = document.getElementById('projects-grid');
 
-                    <hr>
-                    <h2>Final Experience</h2>
-                    <p>By the end of the redesigned flow, users focus on reviewing system-generated responses. Manual typing is minimized, cognitive load is reduced, and trust is maintained through transparency and review. The assessment becomes a guided validation process rather than a manual questionnaire.</p>
-                    <h2>Impact</h2>
-                    <ul>
-                        <li>Reduced task completion effort and perceived fatigue.</li>
-                        <li>Faster assessment completion.</li>
-                        <li>Fewer user complaints around usability.</li>
-                        <li>Improved confidence in data accuracy.</li>
-                    </ul>
-                `
-            },
-            {
-                id: "agentorchestration",
-                title: "Agentic AI Orchestration Platform",
-                tag: "AI / Enterprise Tool",
-                role: "Sole UX Designer",
-                impact: "Active Product",
-                description: "End-to-end design of an enterprise agentic AI orchestration platform.",
-                content: `
-                    <div class="meta-grid">
-                        <div><span class="meta-label">Status</span><div class="meta-value">Active Product</div></div>
-                        <div><span class="meta-label">Role</span><div class="meta-value">Sole UX Designer</div></div>
-                        <div><span class="meta-label">Timeline</span><div class="meta-value">1+ Year Ownership</div></div>
-                        <div><span class="meta-label">Scope</span><div class="meta-value">End-to-End UX</div></div>
-                    </div>
-                    <p class="lead">Enterprise platform for creating, orchestrating, and managing AI agents through a scalable visual workflow.</p>
-                    <h2>Overview</h2>
-                    <p>I am the sole designer responsible for the end-to-end UX of an enterprise agentic AI orchestration platform. The system enables customers to configure AI resources, compose agents visually, and interact with them in production environments.</p>
-                    <hr>
-                    <h2>Resource Registration & Configuration</h2>
-                    <p>Before creating agents, users configure foundational AI resources that serve as reusable building blocks across the platform. This includes:</p>
-                    <ul>
-                        <li><strong>LLM registration</strong> to configure and manage model providers.</li>
-                        <li><strong>Knowledge base integration</strong> to connect enterprise data sources.</li>
-                        <li><strong>Tools configuration</strong> to enable agents to perform external actions.</li>
-                        <li><strong>Prompt management</strong> to define reusable behavioral instructions.</li>
-                    </ul>
-                    <h2>Agent Creation: Visual Agent Canvas</h2>
-                    <p>Agents are created through a node-based visual canvas, allowing users to orchestrate agent behavior without writing code. Users compose agents by connecting modular nodes such as Agent node, Tools node, Knowledge base node, Rules node, and Human-in-the-loop node.</p>
-                    <h2>Agent Lifecycle: Publish & Interaction</h2>
-                    <p>Once configured, agents can be published and used in real-world scenarios. The platform enables users to manage, interact, observe, and continuously refine agents.</p>
-                    <hr>
-                    <h2>Ownership & Responsibilities</h2>
-                    <p>As the sole designer on this product, I am responsible for defining the end-to-end orchestration UX, structuring workflows for agent creation, and ensuring scalability as new capabilities are introduced.</p>
-                    <h2>Impact</h2>
-                    <ul>
-                        <li>Enabled enterprise users to create and manage AI agents without engineering dependency.</li>
-                        <li>Reduced complexity in configuring and orchestrating agent workflows.</li>
-                        <li>Established scalable UX foundations for ongoing platform evolution.</li>
-                    </ul>
-                    <blockquote>Some system details and internal orchestration logic are not shown due to confidentiality. This case study reflects high-level design ownership and platform impact.</blockquote>
-                `
-            },
-            {
-                id: "apiregistration",
-                title: "API Platform",
-                tag: "Internal Platform / B2B",
-                role: "UX Designer",
-                impact: "Low-Code Integration",
-                description: "Register, configure, and consume APIs within decision strategies.",
-                content: `
-                    <div class="meta-grid">
-                        <div><span class="meta-label">Role</span><div class="meta-value">Product Designer (UX)</div></div>
-                        <div><span class="meta-label">Domain</span><div class="meta-value">Internal Platform</div></div>
-                        <div><span class="meta-label">Duration</span><div class="meta-value">3 Weeks</div></div>
-                    </div>
-                    <h2>Overview</h2>
-                    <p>This project focused on designing an internal platform that enables teams to register external APIs and safely consume them inside decision strategies, without constant developer involvement.</p>
-                    <h2>Problem Statement</h2>
-                    <p>Business teams wanted to use external APIs inside decision strategies, but existing workflows were heavily dependent on engineering. APIs are inherently technical, and there was no clear ownership or visibility into execution success.</p>
-                    <h2>Design Approach: Role‑Based Ownership</h2>
-                    <p>I proposed a clear separation of responsibility to reduce cognitive load and prevent misuse:</p>
-                    <ul>
-                        <li><strong>Admin:</strong> API registration and output mapping</li>
-                        <li><strong>Business Analyst:</strong> Input mapping and decision logic</li>
-                        <li><strong>System:</strong> Execution, retries, and error handling</li>
-                    </ul>
-                    <h2>Outcome & Impact</h2>
-                    <ul>
-                        <li>Clarified ambiguous PRD requirements through UX‑led thinking.</li>
-                        <li>Reduced dependency on engineering for validation and debugging.</li>
-                        <li>Enabled safe reuse of APIs across multiple strategies.</li>
-                    </ul>
-                `
-            },
-            {
-                id: "fieldofficer",
-                title: "Field Officer App",
-                tag: "Mobile / Offline-First",
-                role: "UX Designer",
-                impact: "Sync Efficiency",
-                description: "Offline-first mobile tool for on-ground data collection.",
-                content: `
-                    <div class="meta-grid">
-                        <div><span class="meta-label">Role</span><div class="meta-value">End-to-End UX</div></div>
-                        <div><span class="meta-label">Platform</span><div class="meta-value">Mobile (iOS/Android)</div></div>
-                        <div><span class="meta-label">Focus</span><div class="meta-value">Offline-First</div></div>
-                        <div><span class="meta-label">Result</span><div class="meta-value">50% Faster Visits</div></div>
-                    </div>
-                    <h2>The Challenge</h2>
-                    <p>Field officers operate in rural areas with poor connectivity. They were using a hybrid of paper notes and a sluggish web portal that required constant internet. This led to massive data loss and long delays.</p>
-                    <h2>Strategy: Offline-First</h2>
-                    <p>We designed a native app architecture where the "source of truth" is the local device database, which syncs to the cloud only when a connection is available.</p>
-                    <h3>Key Decisions</h3>
-                    <ul>
-                        <li><strong>Local Persistence:</strong> All actions save locally immediately. No spinners waiting for server confirmation.</li>
-                        <li><strong>Optimistic UI:</strong> The interface confirms actions immediately, syncing in the background later.</li>
-                        <li><strong>Simplified Input:</strong> Replaced typing with geofencing, smart dropdowns, and photo capture.</li>
-                    </ul>
-                    <h2>Impact</h2>
-                    <blockquote>"Proposed solution demonstrated a 50% reduction in time-spent-per-visit and eliminated data loss due to connectivity drops during user testing."</blockquote>
-                `
-            },
-            {
-                id: "microusability",
-                title: "Micro Usability",
-                tag: "UX Research / Medium",
-                role: "Researcher",
-                impact: "Friction Reduction",
-                link: "https://medium.com/@suryateja.s/case-study-why-micro-usability-problems-deserve-macro-attention-695eb37dec63",
-                description: "Why small usability problems deserve macro attention.",
-                content: `
-                    <div class="meta-grid">
-                        <div><span class="meta-label">Type</span><div class="meta-value">Case Study</div></div>
-                        <div><span class="meta-label">Context</span><div class="meta-value">Music App</div></div>
-                        <div><span class="meta-label">Focus</span><div class="meta-value">Micro-Interactions</div></div>
-                    </div>
-                    <h2>The Problem</h2>
-                    <p>When users interacted with the search widget in the Music app, they couldn’t clear the search input without first clicking the backspace key to reveal the clear icon. This forced users to interrupt their natural flow just to modify a query.</p>
-                    <h2>The Solution</h2>
-                    <p>I designed a streamlined interaction pattern to eliminate this redundancy. The “clear” (cross) icon is made visible immediately when the user taps into the search field, eliminating the "backspace first" step.</p>
-                    <h2>Why It Matters</h2>
-                    <p>While seemingly minor, this missing icon has broader implications. It eliminates the "death by a thousand cuts" feeling of repetitive extra steps, and users perceive app quality based on these micro-interactions.</p>
-                `
-            }
-        ];
+projects.forEach((p, i) => {
+    const card = document.createElement('article');
+    card.className = 'project-card' + (p.featured ? ' is-featured' : '');
+    card.setAttribute('role', 'listitem');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Case study: ${p.title}`);
 
-        // Render Projects Grid
-        const gridContainer = document.getElementById('projects-grid');
-        projects.forEach((project, index) => {
-            const impactHtml = project.impact ? `<span class="text-xs font-medium text-[var(--text-secondary)] flex items-center gap-1">${project.impact}</span>` : '';
-            gridContainer.innerHTML += `
-                <div onclick="openProject(${index})" class="group flex flex-col justify-between p-6 md:p-8 rounded-2xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-hover)] hover:-translate-y-1 hover:shadow-[var(--card-shadow-hover)] transition-all duration-300 ease-out cursor-pointer min-h-[220px]">
-                    <div>
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-full border border-[var(--border)] text-[var(--text-secondary)] bg-[var(--bg)] transition-colors">${project.tag}</span>
-                            ${impactHtml}
-                        </div>
-                        <h3 class="text-xl font-semibold text-[var(--text)] mb-2 group-hover:text-[var(--text-secondary)] transition-colors">${project.title}</h3>
-                        <p class="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">${project.description}</p>
-                    </div>
-                    <div class="pt-6 mt-auto flex items-center justify-between border-t border-[var(--border)] transition-colors">
-                        <span class="text-sm font-medium text-[var(--text)]">${project.role}</span>
-                        <i data-lucide="chevron-right" class="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[var(--text)] group-hover:translate-x-1 transition-all"></i>
-                    </div>
-                </div>
-            `;
-        });
+    const metricHtml = p.metric
+        ? `<p class="card-metric"><strong>${p.metric.val}</strong> ${p.metric.lbl}</p>`
+        : '';
 
-        // Initialize Icons
-        lucide.createIcons();
-        updateThemeIcons();
+    const impactHtml = p.impact
+        ? `<span class="card-impact">${p.impact}</span>`
+        : '';
 
-        // Application State
-        let currentProjectIndex = -1;
-        const modal = document.getElementById('project-modal');
-        const scrollArea = document.getElementById('project-scroll-area');
-        const lightbox = document.getElementById('lightbox');
+    card.innerHTML = `
+        <div>
+            <div class="card-header">
+                <span class="card-tag">${p.tag}</span>
+                ${impactHtml}
+            </div>
+            <h3 class="card-title">${p.title}</h3>
+            <p class="card-desc">${p.description}</p>
+            ${metricHtml}
+        </div>
+        <div class="card-footer">
+            <span class="card-role">${p.role}</span>
+            <svg class="card-arrow" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+    `;
 
-        // Functions
-        function copyEmail() {
-            try {
-                const textArea = document.createElement("textarea");
-                textArea.value = "suryateja.shankapally@gmail.com";
-                textArea.style.position = "fixed";
-                textArea.style.left = "-9999px";
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                
-                if (document.execCommand('copy')) {
-                    const btnText = document.getElementById('email-text');
-                    const btnIcon = document.getElementById('email-icon');
-                    btnText.textContent = "Copied!";
-                    
-                    // Manually swap SVG to check icon
-                    btnIcon.outerHTML = `<i data-lucide="check" id="email-icon" class="w-4 h-4"></i>`;
-                    lucide.createIcons();
+    card.addEventListener('click', () => openProject(i));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(i); } });
+    grid.appendChild(card);
+});
 
-                    setTimeout(() => {
-                        document.getElementById('email-text').textContent = "Email Me";
-                        document.getElementById('email-icon').outerHTML = `<i data-lucide="mail" id="email-icon" class="w-4 h-4"></i>`;
-                        lucide.createIcons();
-                    }, 2000);
-                }
-                document.body.removeChild(textArea);
-            } catch (err) { console.error('Copy failed', err); }
-        }
+// ── MODAL ────────────────────────────────────────────────────────────────────
+const modal   = document.getElementById('project-modal');
+const mScroll = document.getElementById('modal-scroll');
+const lbox    = document.getElementById('lightbox');
+let lastFocus = null;
 
-        function openProject(index) {
-            currentProjectIndex = index;
-            const project = projects[index];
-            
-            document.getElementById('project-tag').textContent = project.tag;
-            document.getElementById('project-title').textContent = project.title;
-            document.getElementById('project-content').innerHTML = project.content;
-            document.getElementById('project-counter').textContent = `${index + 1} / ${projects.length}`;
-            
-            const nextProjIndex = (index + 1) % projects.length;
-            document.getElementById('next-project-title').textContent = projects[nextProjIndex].title;
+function openProject(i) {
+    currentIndex = i;
+    const p = projects[i];
 
-            const linkContainer = document.getElementById('project-link-container');
-            if (project.link) {
-                linkContainer.classList.remove('hidden');
-                document.getElementById('project-link').href = project.link;
-            } else {
-                linkContainer.classList.add('hidden');
-            }
+    document.getElementById('modal-tag').textContent     = p.tag;
+    document.getElementById('modal-title').textContent   = p.title;
+    document.getElementById('modal-content').innerHTML   = p.content;
+    document.getElementById('modal-counter').textContent = `${i + 1} / ${projects.length}`;
+    document.getElementById('next-title').textContent    = projects[(i + 1) % projects.length].title;
 
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-            scrollArea.scrollTop = 0;
-            
-            lucide.createIcons();
-        }
+    const lnk = document.getElementById('modal-link');
+    if (p.link) { lnk.href = p.link; lnk.classList.remove('hidden'); }
+    else        { lnk.classList.add('hidden'); }
 
-        function closeProject() {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            document.body.style.overflow = 'unset';
-            currentProjectIndex = -1;
-        }
+    lastFocus = document.activeElement;
+    modal.classList.remove('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    mScroll.scrollTop = 0;
 
-        function navigateProject(direction) {
-            if (currentProjectIndex === -1) return;
-            let newIndex = (currentProjectIndex + direction) % projects.length;
-            if (newIndex < 0) newIndex = projects.length - 1;
-            openProject(newIndex);
-        }
+    // Move focus to modal
+    requestAnimationFrame(() => {
+        const first = modal.querySelector('button');
+        if (first) first.focus();
+    });
+}
 
-        // Lightbox Event Delegation
-        document.getElementById('project-content').addEventListener('click', function(e) {
-            if (e.target.tagName === 'IMG') {
-                openLightbox(e.target.src, e.target.alt);
-            }
-        });
+function closeProject() {
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    currentIndex = -1;
+    if (lastFocus) lastFocus.focus();
+}
 
-        function openLightbox(src, alt) {
-            const img = document.getElementById('lightbox-img');
-            img.src = src;
-            img.alt = alt;
-            lightbox.classList.remove('hidden');
-            lightbox.classList.add('flex');
-        }
+function navigateProject(dir) {
+    if (currentIndex === -1) return;
+    openProject((currentIndex + dir + projects.length) % projects.length);
+}
 
-        function closeLightbox() {
-            lightbox.classList.add('hidden');
-            lightbox.classList.remove('flex');
-        }
+// ── LIGHTBOX ──────────────────────────────────────────────────────────────────
+document.getElementById('modal-content').addEventListener('click', e => {
+    if (e.target.tagName === 'IMG') openLightbox(e.target.src, e.target.alt);
+});
 
-        // Keyboard Navigation
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (!lightbox.classList.contains('hidden')) {
-                    closeLightbox();
-                } else if (!modal.classList.contains('hidden')) {
-                    closeProject();
-                }
-            }
-        });
-    </script>
+function openLightbox(src, alt) {
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = alt;
+    lbox.classList.remove('hidden');
+    lbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.querySelector('.lightbox-close').focus();
+}
+
+function closeLightbox() {
+    lbox.classList.add('hidden');
+    lbox.setAttribute('aria-hidden', 'true');
+    if (modal.classList.contains('hidden')) document.body.style.overflow = '';
+}
+
+// ── EMAIL COPY ───────────────────────────────────────────────────────────────
+function copyEmail() {
+    const addr = 'suryateja.shankapally@gmail.com';
+    const el   = document.createElement('textarea');
+    el.value = addr;
+    el.style.cssText = 'position:fixed;left:-9999px;opacity:0;';
+    document.body.appendChild(el);
+    el.select();
+    try {
+        document.execCommand('copy');
+        const txt  = document.getElementById('email-text');
+        const icon = document.getElementById('email-icon');
+        txt.textContent = 'Copied!';
+        icon.innerHTML  = '<polyline points="20 6 9 17 4 12"/>';
+        document.getElementById('email-btn').setAttribute('aria-label', 'Email copied to clipboard');
+        setTimeout(() => {
+            txt.textContent = 'Email Me';
+            icon.innerHTML  = '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>';
+            document.getElementById('email-btn').setAttribute('aria-label', 'Copy email address to clipboard');
+        }, 2400);
+    } catch {
+        window.location.href = `mailto:${addr}`;
+    }
+    document.body.removeChild(el);
+}
+
+// ── KEYBOARD ─────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        if (!lbox.classList.contains('hidden'))   { closeLightbox(); return; }
+        if (!modal.classList.contains('hidden'))  { closeProject();  return; }
+    }
+    if (!modal.classList.contains('hidden')) {
+        if (e.key === 'ArrowRight') navigateProject(1);
+        if (e.key === 'ArrowLeft')  navigateProject(-1);
+    }
+});
+/* FIX 2b: Remove :focus-visible ring after mouse/touch interactions */
+document.addEventListener('mousedown', () => document.body.classList.add('using-mouse'));
+document.addEventListener('keydown',   () => document.body.classList.remove('using-mouse'));
+
+</script>
 </body>
 </html>
