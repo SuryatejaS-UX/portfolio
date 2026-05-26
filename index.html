@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Surya Teja Shankapally — Product Designer specializing in AI and enterprise UX. 4+ years at TCS designing agentic AI platforms and complex workflows.">
-    <title>Surya Teja Shankapally — Product Designer</title>
+    <title>Surya Teja Shankapally — Senior Product Designer</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -330,32 +330,14 @@
             gap: 12px;
             margin-top: 18px;
         }
-        @media (min-width: 640px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 768px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
 
         /* FIX: Featured card spans full grid width for visual dominance */
-        @media (min-width: 640px) {
+        @media (min-width: 768px) {
             .project-card.is-featured {
                 grid-column: 1 / -1;
-																				  
                 padding: 28px 32px;
-                min-height: 200px;
-                display: grid;
-                grid-template-columns: 1fr auto;
-                grid-template-rows: 1fr;
-                align-items: end;
-                gap: 0 24px;
-            }
-            .project-card.is-featured .card-footer {
-                border-top: none;
-                border-left: 1px solid rgba(128,128,128,0.22);
-                padding-top: 0;
-                padding-left: 24px;
-                margin-top: 0;
-                flex-direction: column;
-                align-items: flex-end;
-                justify-content: flex-end;
-                gap: 8px;
-                min-width: max-content;
+                min-height: 216px;
             }
         }
 
@@ -423,17 +405,15 @@
 						  
    
 		 
-        .project-card.is-featured .card-role     { color: var(--accent-inv); }
-        .project-card.is-featured .card-arrow    { color: var(--accent-inv); opacity: 0.55; }
-        .project-card.is-featured:hover .card-arrow { opacity: 1; }
+        .project-card.is-featured .card-action   { color: var(--accent-inv); }
 
         /* Card atoms */
         .card-header {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .card-tag {
@@ -453,7 +433,18 @@
             font-weight: 500;
             color: var(--text-3);
             white-space: nowrap;
-            padding-top: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-impact::before {
+            content: "";
+            display: inline-block;
+            width: 3.5px;
+            height: 3.5px;
+            border-radius: 50%;
+            background: currentColor;
+            opacity: 0.5;
         }
 
         /* FIX: Card title — larger for faster recruiter scan */
@@ -495,14 +486,68 @@
             border-top: 1px solid var(--border);
         }
 
-        .card-role { font-size: 0.8125rem; font-weight: 500; color: var(--text); }
+        .card-action {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--text);
+            transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover .card-action {
+            opacity: 0.8;
+        }
+        .project-card.is-featured .card-action {
+            color: var(--accent-inv);
+        }
+        .project-card.is-featured:hover .card-action {
+            opacity: 0.85;
+        }
+
+        /* Card arrow circular wrap and animation */
+        .card-arrow-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--border-strong);
+            color: var(--text-2);
+            background: var(--bg-alt);
+            flex-shrink: 0;
+            transition: background 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .project-card:hover .card-arrow-wrap {
+            background: var(--text);
+            border-color: var(--text);
+            color: var(--bg);
+            transform: scale(1.08);
+        }
+
+        .project-card.is-featured .card-arrow-wrap {
+            border-color: rgba(128,128,128,0.22);
+            background: rgba(128,128,128,0.08);
+            color: var(--accent-inv);
+        }
+
+        .project-card.is-featured:hover .card-arrow-wrap {
+            background: var(--accent-inv);
+            border-color: var(--accent-inv);
+            color: var(--text);
+        }
 
         .card-arrow {
-            color: var(--text-3);
+            color: inherit;
             flex-shrink: 0;
-            transition: transform 0.16s, color 0.16s;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .project-card:hover .card-arrow { transform: translateX(4px); color: var(--text); }
+
+        .project-card:hover .card-arrow {
+            transform: translateX(2px);
+        }
 
         /* ── SKILLS ────────────────────────────────────────────────────────────── */
         .skills-grid {
@@ -515,7 +560,7 @@
             overflow: hidden;
             margin-top: 18px;
         }
-        @media (min-width: 640px) { .skills-grid { grid-template-columns: repeat(3,1fr); } }
+        @media (min-width: 768px) { .skills-grid { grid-template-columns: repeat(3,1fr); } }
 
         .skill-cell { background: var(--surface); padding: 20px 22px; }
 
@@ -550,7 +595,7 @@
             gap: 40px;
             margin-top: 0;
         }
-        @media (min-width: 640px) { .exp-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 768px) { .exp-grid { grid-template-columns: 1fr 1fr; } }
 
         .timeline {
             display: flex;
@@ -621,7 +666,7 @@
             text-align: center;
             margin-top: 88px;
         }
-        @media (min-width: 640px) {
+        @media (min-width: 768px) {
             .site-footer { flex-direction: row; justify-content: space-between; text-align: left; }
         }
 
@@ -1049,7 +1094,6 @@
             <h1 class="hero-title">
                 I design clear, usable products for complex enterprise and AI workflows.
             </h1>
-
             <p class="hero-intro">
                 Product Designer at TCS with 4+ years building agentic AI platforms, compliance tools, and design systems. I focus on making hard problems feel approachable.
             </p>
@@ -1316,11 +1360,11 @@ const projects = [
         id: 'agent-platform',
         title: 'Agentic AI Orchestration Platform',
         tag: 'AI / Enterprise Platform',
-        role: 'Sole UX Designer',
         impact: 'Active Product · 2+ Year',
-        metric: { val: 'Sole designer', lbl: 'end-to-end ownership' },
+        metric: null,
         featured: true,
-        description: 'End-to-end UX for an enterprise multi-agent AI platform. Users configure, compose, and manage AI agents entirely through the UI.No code. No engineering tickets.',
+        actionText: 'Sole designer end-to-end ownership',
+        description: 'End-to-end UX for an enterprise multi-agent AI platform. Users configure, compose, and manage AI agents entirely through the UI. No code. No engineering tickets.',
 		content: `
             <div class="meta-grid">
                 <div><span class="meta-label">Role</span><span class="meta-val">Sole UX Designer</span></div>
@@ -1374,11 +1418,11 @@ const projects = [
     },
     {
         id: 'sustainability-portal',
-        title: 'Vendor Sustainability Compliance portal',
+        title: 'Vendor Compliance Portal',
         tag: 'Compliance / Workflow',
-        role: 'Lead Designer',
         impact: '~35% Faster Completion',
         metric: { val: '~35%', lbl: 'completion time reduced' },
+        actionText: 'AI Workflow System',
         description: 'Redesigned a 400-question compliance workflow. Cut completion time by ~35% through better prioritization and AI-assisted document extraction.',
         content: `
             <div class="meta-grid">
@@ -1441,9 +1485,9 @@ const projects = [
         id: 'api-integration',
         title: 'API Integration Workflow',
         tag: 'Internal Platform / B2B',
-        role: 'UX Designer (Owner)',
         impact: '~80% Less Engineering Dependency',
         metric: { val: '~80%', lbl: 'configs without eng tickets' },
+        actionText: 'B2B Integration Platform',
         description: 'Designed a two-persona workflow letting business teams consume external APIs in decision strategies. No engineering ticket needed for routine configurations.',
         content: `
             <div class="meta-grid">
@@ -1501,9 +1545,9 @@ const projects = [
         id: 'field-officer-app',
         title: 'Field Officer Companion App',
         tag: 'Mobile / Offline-First',
-        role: 'UX Designer',
         impact: '50% Faster Field Visits',
         metric: { val: '50%', lbl: 'faster visit completion' },
+        actionText: 'Offline-First Mobile App',
         description: 'Offline-first mobile app for field officers working in areas with poor connectivity. Eliminated data loss and cut visit time by 50% in user testing.',
         content: `
             <div class="meta-grid">
@@ -1542,11 +1586,11 @@ const projects = [
         id: 'micro-usability',
         title: 'Micro Usability in Music Apps',
         tag: 'UX Research / Published',
-        role: 'UX Researcher',
         impact: 'Published on Medium',
         metric: null,
         link: 'https://medium.com/@suryateja.s/case-study-why-micro-usability-problems-deserve-macro-attention-695eb37dec63',
-        description: 'A published case study on why small interaction problems matter,  Analysing a hidden friction point in music app search that affected every session.',
+        actionText: 'UX Research Case Study',
+        description: 'A published case study on why small interaction problems matter. Analyzing a hidden friction point in music app search that affected every session.',
         content: `
             <div class="meta-grid">
                 <div><span class="meta-label">Type</span><span class="meta-val">Personal Case Study</span></div>
@@ -1598,8 +1642,10 @@ projects.forEach((p, i) => {
             ${metricHtml}
         </div>
         <div class="card-footer">
-            <span class="card-role">${p.role}</span>
-            <svg class="card-arrow" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            <span class="card-action">${p.actionText}</span>
+            <div class="card-arrow-wrap">
+                <svg class="card-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
         </div>
     `;
 
